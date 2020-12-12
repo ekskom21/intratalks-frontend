@@ -1,11 +1,11 @@
 import React from 'react';
 import { Switch, Route } from 'react-router-dom';
-import Frontpage from './Frontpage';
+import ComingEvents from './ComingEvents';
 
 const Router: React.FC = () => {
     return (
         <Switch>
-            <Route exact path="/" component={Frontpage} />
+            <Route exact path="/" component={ComingEvents} />
         </Switch>
     );
 };

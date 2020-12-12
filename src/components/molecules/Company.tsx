@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-type CompanyInfo = { id: number; name: string; shortDescription: string; gradient: string };
+type Props = { company: { id: number; name: string; shortDescription: string; gradient: string } };
 
 const Company: React.FC<CompanyInfo> = (company: CompanyInfo) => {
     const numPresentations = Math.floor(Math.random() * 4);

@@ -16,7 +16,7 @@ const Company: React.FC<Props> = (props) => {
                         ? numPresentations + ' kommende arrangementer'
                         : 'Ingen kommende arrangementer'}
                 </small>
-                <p>{company.shortDescription}</p>
+                <p>{props.company.shortDescription}</p>
             </article>
         </Link>
     );

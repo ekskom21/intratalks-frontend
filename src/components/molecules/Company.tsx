@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 type Props = { company: { id: number; name: string; shortDescription: string; gradient: string } };
 
-const Company: React.FC<CompanyInfo> = (company: CompanyInfo) => {
+const Company: React.FC<Props> = (props) => {
     const numPresentations = Math.floor(Math.random() * 4);
 
     return (

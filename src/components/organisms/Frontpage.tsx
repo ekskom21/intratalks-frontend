@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 
 const Frontpage: React.FC = () => <h1>Hello</h1>;
 

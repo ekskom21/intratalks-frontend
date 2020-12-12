@@ -1,6 +1,8 @@
 import React from "react";
 import { render } from "react-dom";
 
+import "./index.css";
+
 import Frontpage from "./components/organisms/Frontpage";
 
 import reportWebVitals from "./reportWebVitals";

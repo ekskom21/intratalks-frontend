@@ -1,3 +1,4 @@
+import classNames from 'classnames';
 import React from 'react';
 
 import { Link } from 'react-router-dom';
@@ -34,27 +35,30 @@ const ComingEvents: React.FC = () => {
     ];
 
     return (
-        <main className="p-4">
+        <main className={classNames('p-4')}>
             {comingEvents.map((event) => (
                 <Link to={`/event/${event.id}`} key={`${event.title}@${event.time}`}>
-                    <section className="dark:bg-gray-900 bg-gray-200 my-4 p-4 rounded-lg">
+                    <section className={classNames('dark:bg-gray-900', 'bg-gray-200', 'my-4', 'p-4', 'rounded-lg')}>
                         <div
                             style={event.time != '13:00 - 15:00' ? { filter: 'grayscale(1)' } : {}}
-                            className={`bg-gradient-to-r ${event.company.gradient} ${
-                                event.time == '13:00 - 15:00' ? 'animate-pulse' : ''
-                            } h-2 rounded-full mb-2`}
+                            className={classNames(
+                                'bg-gradient-to-r',
+                                event.company.gradient,
+                                event.time == '13:00 - 15:00' && 'animate-pulse',
+                                'h-2 rounded-full mb-2',
+                            )}
                         ></div>
 
-                        <small className="dark:text-gray-300 text-sm">
+                        <small className={classNames('dark:text-gray-300', 'text-sm')}>
                             {event.time} · {event.company.name}
                         </small>
 
-                        <h3 className="text-2xl">{event.title}</h3>
+                        <h3 className={classNames('text-2xl')}>{event.title}</h3>
 
                         {event.time != '09:00 - 12:00' ? (
                             <>
-                                <strong className="text-sm font-bold">{event.location}</strong>
-                                <p className="dark:text-gray-400">{event.description}</p>
+                                <strong className={classNames('text-sm', 'font-bold')}>{event.location}</strong>
+                                <p className={classNames('dark:text-gray-400')}>{event.description}</p>
                             </>
                         ) : null}
                     </section>

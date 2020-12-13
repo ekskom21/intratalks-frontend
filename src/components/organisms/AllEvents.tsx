@@ -114,7 +114,7 @@ const AllEvents: React.FC = () => {
                 <SmallEvent event={ev} key={ev.id} />
             ))}
 
-            <h2 className={classNames("text-3xl','font-bold','mt-4")}>Middag</h2>
+            <h2 className={classNames('text-3xl', 'font-bold', 'mt-4')}>Middag</h2>
             {allEvents['dinner'].map((ev) => (
                 <SmallEvent event={ev} key={ev.id} />
             ))}

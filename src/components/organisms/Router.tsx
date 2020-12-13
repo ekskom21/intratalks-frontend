@@ -5,6 +5,7 @@ import { Switch, Route } from 'react-router-dom';
 import ComingEvents from './ComingEvents';
 import EventDetails from './EventDetails';
 import Companies from './Companies';
+import About from './About';
 
 const Router: React.FC = () => {
     return (
@@ -13,6 +14,7 @@ const Router: React.FC = () => {
                 <Route exact path="/" component={ComingEvents} />
                 <Route exact path="/companies" component={Companies} />
                 <Route path="/event/:id" component={EventDetails} />
+                <Route path="/about" component={About} />
             </Switch>
         </div>
     );

@@ -1,12 +1,17 @@
 import React, { useState } from 'react';
 
-const Navbar: React.FC = () => {
+type props = {
+    title: string;
+};
+
+const Navbar: React.FC<props> = ({ title }) => {
     const [showDropdown, setShowDropdown] = useState(false);
 
     return (
         <div>
             <nav className="z-10 w-full sticky flex justify-between bg-black text-white p-4">
                 <span className="flex-grow-0">Tech Talks</span>
+                <span className="flex-grow-0">{title}</span>
                 <button className="flex-grow-0"></button>
                 <div className="ml-3 relative">
                     <div>

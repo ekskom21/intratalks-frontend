@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 
-type props = {
+type Props = {
     title: string;
 };
 
-const Navbar: React.FC<props> = ({ title }) => {
+const Navbar: React.FC<Props> = ({ title }) => {
     const [showDropdown, setShowDropdown] = useState(false);
 
     return (

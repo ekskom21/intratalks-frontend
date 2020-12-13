@@ -6,7 +6,7 @@ import ComingEvents from './ComingEvents';
 import EventDetails from './EventDetails';
 import Companies from './Companies';
 import Frontpage from './Frontpage';
-      
+
 const Router: React.FC = () => {
     return (
         <div className="dark:bg-black dark:text-white min-h-screen">

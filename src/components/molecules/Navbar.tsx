@@ -70,7 +70,7 @@ const Navbar: React.FC<Props> = ({ title }) => {
                     Bedrifter
                 </a>
                 <a
-                    href="#"
+                    href="/about"
                     className="block border-2 dark:border-gray-800 border-gray-100 px-8 py-2 text-3xl dark:bg-white bg-black dark:text-black text-white dark:hover:bg-gray-100 hover:bg-gray-800"
                     role="menuitem"
                 >

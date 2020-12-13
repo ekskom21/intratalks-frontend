@@ -9,14 +9,14 @@ const Navbar: React.FC<props> = ({ title }) => {
 
     return (
         <div>
-            <nav className="z-10 w-full sticky flex justify-between bg-black text-white p-4">
+            <nav className="z-10 w-full sticky flex justify-between dark:bg-white bg-black dark:text-black text-white p-4">
                 <span className="flex-grow-0">Tech Talks</span>
                 <span className="flex-grow-0">{title}</span>
                 <button className="flex-grow-0"></button>
                 <div className="ml-3 relative">
                     <div>
                         <button
-                            className="bg-gray-800 flex text-sm rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white"
+                            className="bg-transparent flex text-sm rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white"
                             id="user-menu"
                             aria-haspopup="true"
                             onClick={() => setShowDropdown((curr) => !curr)}
@@ -40,37 +40,38 @@ const Navbar: React.FC<props> = ({ title }) => {
                 </div>
             </nav>
             <div
-                className={`${
-                    showDropdown ? 'transform ' : ''
-                }duration-200 translate-y-64 w-full fixed rounded-md bg-white ring-1 ring-black ring-opacity-5 -mt-64`}
+                className={`transition-height duration-500 ${
+                    showDropdown ? 'h-56' : 'h-0'
+                } w-full ring-1 ring-black ring-opacity-5`}
+                style={{ overflow: 'hidden' }}
                 role="menu"
                 aria-orientation="vertical"
                 aria-labelledby="user-menu"
             >
                 <a
                     href="#"
-                    className="block border-2 px-8 py-2 text-3xl text-gray-700 hover:bg-gray-100"
+                    className="block border-2 dark:border-gray-800 border-gray-100 px-8 py-2 text-3xl dark:bg-white bg-black dark:text-black text-white dark:hover:bg-gray-100 hover:bg-gray-800"
                     role="menuitem"
                 >
                     Logg Inn
                 </a>
                 <a
                     href="#"
-                    className="block border-2 px-8 py-2 text-3xl text-gray-700 hover:bg-gray-100"
+                    className="block border-2 dark:border-gray-800 border-gray-100 px-8 py-2 text-3xl dark:bg-white bg-black dark:text-black text-white dark:hover:bg-gray-100 hover:bg-gray-800"
                     role="menuitem"
                 >
                     Forside
                 </a>
                 <a
                     href="#"
-                    className="block border-2 px-8 py-2 text-3xl text-gray-700 hover:bg-gray-100"
+                    className="block border-2 dark:border-gray-800 border-gray-100 px-8 py-2 text-3xl dark:bg-white bg-black dark:text-black text-white dark:hover:bg-gray-100 hover:bg-gray-800"
                     role="menuitem"
                 >
                     Bedrifter
                 </a>
                 <a
                     href="#"
-                    className="block border-2 px-8 py-2 text-3xl text-gray-700 hover:bg-gray-100"
+                    className="block border-2 dark:border-gray-800 border-gray-100 px-8 py-2 text-3xl dark:bg-white bg-black dark:text-black text-white dark:hover:bg-gray-100 hover:bg-gray-800"
                     role="menuitem"
                 >
                     Om Tech Talks

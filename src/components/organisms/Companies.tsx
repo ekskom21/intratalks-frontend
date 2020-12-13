@@ -1,3 +1,4 @@
+import classNames from 'classnames';
 import React from 'react';
 
 import Company from '../molecules/Company';
@@ -26,7 +27,7 @@ const Companies: React.FC = () => {
     ];
 
     return (
-        <main className="p-4">
+        <main className={classNames('p-4')}>
             {companies.map((company) => (
                 <Company key={company.id} company={company} />
             ))}

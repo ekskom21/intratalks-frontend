@@ -1,5 +1,8 @@
 import React from 'react';
+
 import { Link } from 'react-router-dom';
+
+import classNames from 'classnames';
 
 type Props = {
     event: {
@@ -13,15 +16,24 @@ type Props = {
 const SmallEvent: React.FC<Props> = ({ event }) => {
     return (
         <Link to={`/event/${event.id}`}>
-            <section className="flex justify-between my-2">
+            <section className={classNames('flex', 'justify-between', 'my-2')}>
                 <div>
-                    <h5 className="font-semibold">{event.title}</h5>
+                    <h5 className={classNames('font-semibold')}>{event.title}</h5>
                     <small>
                         {event.company.name} · {event.location}
                     </small>
                 </div>
                 <span
-                    className={`self-center bg-gradient-to-r ${event.company.gradient} font-extrabold text-xl mb-2 bg-clip-text text-transparent`}
+                    className={classNames(
+                        'self-center',
+                        'bg-gradient-to-r',
+                        event.company.gradient,
+                        'font-extrabold',
+                        'text-xl',
+                        'mb-2',
+                        'bg-clip-text',
+                        'text-transparent',
+                    )}
                 >
                     →
                 </span>

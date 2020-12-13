@@ -1,3 +1,4 @@
+import classNames from 'classnames';
 import React from 'react';
 import SmallEvent from '../atoms/SmallEvent';
 
@@ -102,18 +103,18 @@ const allEvents = {
 
 const AllEvents: React.FC = () => {
     return (
-        <main className="p-4">
-            <h2 className="text-3xl font-bold">Frokost</h2>
+        <main className={classNames('p-4')}>
+            <h2 className={classNames('text-3xl', 'font-bold')}>Frokost</h2>
             {allEvents['breakfast'].map((ev) => (
                 <SmallEvent event={ev} key={ev.id} />
             ))}
 
-            <h2 className="text-3xl font-bold mt-4">Lunsj</h2>
+            <h2 className={classNames('text-3xl', 'font-bold', 'mt-4')}>Lunsj</h2>
             {allEvents['lunch'].map((ev) => (
                 <SmallEvent event={ev} key={ev.id} />
             ))}
 
-            <h2 className="text-3xl font-bold mt-4">Middag</h2>
+            <h2 className={classNames("text-3xl','font-bold','mt-4")}>Middag</h2>
             {allEvents['dinner'].map((ev) => (
                 <SmallEvent event={ev} key={ev.id} />
             ))}

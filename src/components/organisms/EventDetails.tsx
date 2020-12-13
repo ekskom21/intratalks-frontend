@@ -1,3 +1,4 @@
+import classNames from 'classnames';
 import React from 'react';
 import { Link } from 'react-router-dom';
 
@@ -13,22 +14,31 @@ const EventDetails: React.FC = () => {
     };
 
     return (
-        <main className="p-4">
+        <main className={classNames('p-4')}>
             <Link to={`/company/${event.company.id}`}>
                 <span
-                    className={`bg-gradient-to-r ${event.company.gradient} rounded-lg mb-2 inline-block bg-clip-text text-transparent font-extrabold`}
+                    className={classNames(
+                        'bg-gradient-to-r',
+                        event.company.gradient,
+                        'rounded-lg',
+                        'mb-2',
+                        'inline-block',
+                        'bg-clip-text',
+                        'text-transparent',
+                        'font-extrabold',
+                    )}
                 >
                     {event.company.name} →
                 </span>
             </Link>
 
-            <small className="dark:text-gray-300 text-sm block">{event.time}</small>
+            <small className={classNames('dark:text-gray-300', 'text-sm', 'block')}>{event.time}</small>
 
-            <h2 className="text-3xl">{event.title}</h2>
+            <h2 className={classNames('text-3xl')}>{event.title}</h2>
 
-            <strong className="text-sm font-bold">{event.location}</strong>
+            <strong className={classNames('text-sm', 'font-bold')}>{event.location}</strong>
 
-            <p className="mt-4">{event.description}</p>
+            <p className={classNames('mt-4')}>{event.description}</p>
         </main>
     );
 };

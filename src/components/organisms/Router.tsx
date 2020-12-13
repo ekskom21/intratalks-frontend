@@ -4,6 +4,7 @@ import { Switch, Route, useLocation } from 'react-router-dom';
 import ComingEvents from './ComingEvents';
 import EventDetails from './EventDetails';
 import Companies from './Companies';
+import CompanyDetails from './CompanyDetails';
 import AllEvents from './AllEvents';
 import classNames from 'classnames';
 
@@ -19,6 +20,7 @@ const Router: React.FC = () => {
             <Switch>
                 <Route exact path="/" component={signedIn ? ComingEvents : AllEvents} />
                 <Route exact path="/companies" component={Companies} />
+                <Route exact path="/company/:id" component={CompanyDetails} />
                 <Route path="/event/:id" component={EventDetails} />
             </Switch>
         </div>

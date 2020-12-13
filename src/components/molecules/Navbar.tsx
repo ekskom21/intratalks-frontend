@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import { useHistory } from 'react-router-dom';
 
 type Props = {
     title: string;
@@ -6,6 +7,11 @@ type Props = {
 
 const Navbar: React.FC<Props> = ({ title }) => {
     const [showDropdown, setShowDropdown] = useState(false);
+    const history = useHistory();
+
+    useEffect(() => {
+        setShowDropdown(false);
+    }, [history.location.pathname]);
 
     return (
         <div>

@@ -26,13 +26,11 @@ const Companies: React.FC = () => {
     ];
 
     return (
-        <div>
+        <main className="p-4">
             {companies.map((company) => (
-                <div key={company.id}>
-                    <Company {...company} />
-                </div>
+                <Company key={company.id} company={company} />
             ))}
-        </div>
+        </main>
     );
 };
 

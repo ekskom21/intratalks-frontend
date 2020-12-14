@@ -4,7 +4,7 @@ module.exports = {
     theme: {
         extend: {
             transitionProperty: {
-                height: 'height',
+                'max-height': 'max-height',
             },
         },
     },

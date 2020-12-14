@@ -5,6 +5,7 @@ export const ALL_COMPANIES = gql`
     query {
         companies {
             _id
+            name
             events {
                 _id
                 title

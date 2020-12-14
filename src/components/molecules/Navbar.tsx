@@ -68,15 +68,14 @@ const Navbar: React.FC<Props> = ({ title }) => {
             </nav>
             <div
                 className={classNames(
-                    'transition-max-height',
-                    'duration-500',
-                    showDropdown ? 'max-h-60' : 'max-h-0',
+                    showDropdown ? 'max-h-full' : 'max-h-0',
+                    showDropdown && 'py-2',
                     'border-t',
-                    'border-white',
+                    'border-b',
+                    'border-black',
+                    'dark:border-white',
                     'w-full',
-                    'ring-1',
-                    'ring-black',
-                    'ring-opacity-5',
+                    'ring-0',
                 )}
                 style={{ overflow: 'hidden' }}
                 role="menu"

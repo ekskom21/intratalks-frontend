@@ -1,6 +1,5 @@
 import React from 'react';
 import Members from '../molecules/Members';
-import Companies from './Companies';
 
 const About: React.FC = () => {
     return (
@@ -30,8 +29,7 @@ const About: React.FC = () => {
             </p>
             <h2 className="text-4xl">Selskaper</h2>
             <p className="p-2">Alle selskapene som har gjort årets Tech Talks mulig:</p>
-            {/** Sikkert en bedre løsning å vise alle selskapene på */}
-            <Companies />
+            {/** List over alle selskapene */}
             <h2 className="text-4xl">Medlemmer</h2>
             <Members />
         </div>

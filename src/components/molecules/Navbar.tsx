@@ -71,7 +71,7 @@ const Navbar: React.FC<Props> = ({ title }) => {
                     showDropdown ? 'max-h-full' : 'max-h-0',
                     showDropdown && 'py-2',
                     'border-t',
-                    'border-b',
+                    showDropdown && 'border-b',
                     'border-black',
                     'dark:border-white',
                     'w-full',

@@ -2,31 +2,34 @@ import React, { useEffect, useState } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 
 import classNames from 'classnames';
+import { useSignedIn } from '../../contexts/signedIn';
 
 type Props = {
     title: string;
 };
 
-const menuItems: Array<{ title: string; to: string }> = [
-    {
-        title: 'Mine events',
-        to: '/',
-    },
-    {
-        title: 'Bedrifter',
-        to: '/companies',
-    },
-    {
-        title: 'Om Tech Talks',
-        to: '/about',
-    },
-    {
-        title: 'Logg inn',
-        to: '/login',
-    },
-];
-
 const Navbar: React.FC<Props> = ({ title }) => {
+    const isSignedIn = useSignedIn();
+
+    const menuItems: Array<{ title: string; to: string }> = [
+        {
+            title: isSignedIn ? 'Mine events' : 'Alle events',
+            to: '/',
+        },
+        {
+            title: 'Bedrifter',
+            to: '/companies',
+        },
+        {
+            title: 'Om Tech Talks',
+            to: '/about',
+        },
+        {
+            title: 'Logg inn',
+            to: '/login',
+        },
+    ];
+
     const [showDropdown, setShowDropdown] = useState(false);
     const history = useHistory();
 

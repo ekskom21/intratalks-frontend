@@ -1,8 +1,9 @@
 import classNames from 'classnames';
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { AllCompanies } from '../../api/queries/companies';
 
-type Props = { company: { id: number; name: string; shortDescription: string; gradient: string } };
+type Props = { company: AllCompanies['companies'][number] };
 
 const Company: React.FC<Props> = (props) => {
     const numPresentations = Math.floor(Math.random() * 4);
@@ -15,7 +16,8 @@ const Company: React.FC<Props> = (props) => {
                     <span
                         className={classNames(
                             'bg-gradient-to-r',
-                            props.company.gradient,
+                            `from-${props.company.colors.primary}`,
+                            `to-${props.company.colors.secondary}`,
                             'rounded-lg',
                             'mb-2',
                             'inline-block',
@@ -28,14 +30,20 @@ const Company: React.FC<Props> = (props) => {
                     </span>
                 </h1>
                 <div
-                    className={classNames('bg-gradient-to-r', props.company.gradient, 'h-2', 'rounded-full', 'my-1')}
+                    className={classNames(
+                        'bg-gradient-to-r',
+                        `from-${props.company.colors.primary}`,
+                        `to-${props.company.colors.secondary}`,
+                        'h-2',
+                        'rounded-full',
+                        'my-1',
+                    )}
                 ></div>
                 <small className={classNames("dark:text-gray-300','text-sm','mb-3")}>
                     {numPresentations > 0
                         ? numPresentations + ' kommende arrangementer'
                         : 'Ingen kommende arrangementer'}
                 </small>
-                <p>{props.company.shortDescription}</p>
             </article>
         </Link>
     );

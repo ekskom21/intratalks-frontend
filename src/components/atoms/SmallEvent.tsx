@@ -3,31 +3,24 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 import classNames from 'classnames';
+import { EventWithCompany } from '../../generated/graphql';
 
-type Props = {
-    event: {
-        id: number;
-        company: { name: string; gradient: string };
-        title: string;
-        location: string;
-    };
-};
-
-const SmallEvent: React.FC<Props> = ({ event }) => {
+const SmallEvent: React.FC<{ event: EventWithCompany }> = ({ event }) => {
     return (
-        <Link to={`/event/${event.id}`}>
+        <Link to={`/event/${event.event._id}`}>
             <section className={classNames('flex', 'justify-between', 'my-2')}>
                 <div>
-                    <h5 className={classNames('font-semibold')}>{event.title}</h5>
+                    <h5 className={classNames('font-semibold')}>{event.event.title}</h5>
                     <small>
-                        {event.company.name} · {event.location}
+                        {event.company.name} · {event.event.location.name}
                     </small>
                 </div>
                 <span
                     className={classNames(
                         'self-center',
                         'bg-gradient-to-r',
-                        event.company.gradient,
+                        `from-${event.company.colors.primary}`,
+                        `to-${event.company.colors.secondary}`,
                         'font-extrabold',
                         'text-xl',
                         'mb-2',

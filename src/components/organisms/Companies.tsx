@@ -12,7 +12,7 @@ const Companies: React.FC = () => {
     }
 
     return (
-        <main className={classNames('p-4')}>
+        <main className={classNames('px-4')}>
             {data.companies.map((company) => (
                 <Company key={company._id} company={company} />
             ))}

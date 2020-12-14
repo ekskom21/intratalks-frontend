@@ -75,7 +75,6 @@ const Navbar: React.FC<Props> = ({ title }) => {
                     'border-black',
                     'dark:border-white',
                     'w-full',
-                    'ring-0',
                 )}
                 style={{ overflow: 'hidden' }}
                 role="menu"

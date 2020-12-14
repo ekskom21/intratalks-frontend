@@ -13,7 +13,7 @@ const Member: React.FC<Props> = (props) => {
             <img
                 src={props.image}
                 alt="member-image"
-                className="rounded-full h-20 w-20 flex items-center justify-center..."
+                className="rounded-full h-12 w-12 flex items-center justify-center"
             ></img>
             <div className="flex-auto">
                 <h2 className="text-lg">{props.name}</h2>

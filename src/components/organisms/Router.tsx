@@ -9,6 +9,7 @@ import classNames from 'classnames';
 
 import Navbar from '../molecules/Navbar';
 import { SignedInCtx } from '../../contexts/signedIn';
+import { AuthenticationCallback } from './Authentication';
 
 const Router: React.FC = () => {
     const location = useLocation();
@@ -22,6 +23,7 @@ const Router: React.FC = () => {
                     <Route exact path="/" component={signedIn ? ComingEvents : AllEvents} />
                     <Route exact path="/companies" component={Companies} />
                     <Route path="/event/:id" component={EventDetails} />
+                    <Route path="/auth-callback" component={AuthenticationCallback} />
                 </Switch>
             </div>
         </SignedInCtx.Provider>

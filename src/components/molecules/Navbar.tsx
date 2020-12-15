@@ -4,6 +4,9 @@ import { Link, useHistory } from 'react-router-dom';
 import classNames from 'classnames';
 import { useSignedIn } from '../../contexts/signedIn';
 
+const CLIENT_ID = process.env.REACT_APP_OW_CLIENT_ID as string | undefined;
+const CALLBACK_URI = process.env.REACT_APP_CALLBACK_URI as string | undefined;
+
 type Props = {
     title: string;
 };
@@ -26,7 +29,8 @@ const Navbar: React.FC<Props> = ({ title }) => {
         },
         {
             title: 'Logg inn',
-            to: '/login',
+            // TODO: Nonce
+            to: `https://online.ntnu.no/openid/authorize?client_id=${CLIENT_ID}&redirect_uri=${CALLBACK_URI}&response_type=code&scope=openid%20onlineweb4%20profile&state=123`,
         },
     ];
 
@@ -84,14 +88,28 @@ const Navbar: React.FC<Props> = ({ title }) => {
                 aria-orientation="vertical"
                 aria-labelledby="user-menu"
             >
-                {menuItems.map((mi) => (
-                    <Link to={mi.to} key={mi.to}>
+                {menuItems.map((mi) => {
+                    const inner = (
                         <div className={classNames('flex', 'justify-between', 'px-4')}>
                             <span className={classNames('block', 'text-lg', 'p-2', 'font-semibold')}>{mi.title}</span>
                             <span className={classNames('block', 'text-lg', 'p-2', 'font-extrabold')}>→</span>
                         </div>
-                    </Link>
-                ))}
+                    );
+
+                    if (mi.title == 'Logg inn') {
+                        return (
+                            <a href={mi.to} key={mi.to}>
+                                {inner}
+                            </a>
+                        );
+                    }
+
+                    return (
+                        <Link to={mi.to} key={mi.to}>
+                            {inner}
+                        </Link>
+                    );
+                })}
             </div>
         </>
     );

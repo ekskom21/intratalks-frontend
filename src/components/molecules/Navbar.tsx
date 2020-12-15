@@ -1,12 +1,35 @@
-import classNames from 'classnames';
 import React, { useEffect, useState } from 'react';
-import { useHistory } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
+
+import classNames from 'classnames';
+import { useSignedIn } from '../../contexts/signedIn';
 
 type Props = {
     title: string;
 };
 
 const Navbar: React.FC<Props> = ({ title }) => {
+    const isSignedIn = useSignedIn();
+
+    const menuItems: Array<{ title: string; to: string }> = [
+        {
+            title: isSignedIn ? 'Mine events' : 'Alle events',
+            to: '/',
+        },
+        {
+            title: 'Bedrifter',
+            to: '/companies',
+        },
+        {
+            title: 'Om Tech Talks',
+            to: '/about',
+        },
+        {
+            title: 'Logg inn',
+            to: '/login',
+        },
+    ];
+
     const [showDropdown, setShowDropdown] = useState(false);
     const history = useHistory();
 
@@ -16,7 +39,7 @@ const Navbar: React.FC<Props> = ({ title }) => {
 
     return (
         <div className={classNames('sticky', 'top-0')}>
-            <nav className="z-10 w-full flex justify-between dark:bg-white bg-black dark:text-black text-white p-4">
+            <nav className="z-10 w-full sticky flex justify-between p-4">
                 <span className="flex-grow-0">Tech Talks</span>
                 <span className="flex-grow-0">{title}</span>
                 <button className="flex-grow-0"></button>
@@ -47,42 +70,28 @@ const Navbar: React.FC<Props> = ({ title }) => {
                 </div>
             </nav>
             <div
-                className={`transition-height duration-500 ${
-                    showDropdown ? 'h-56' : 'h-0'
-                } w-full ring-1 ring-black ring-opacity-5`}
+                className={classNames(
+                    showDropdown ? 'max-h-full' : 'max-h-0',
+                    showDropdown && 'py-2',
+                    'border-t',
+                    showDropdown && 'border-b',
+                    'border-black',
+                    'dark:border-white',
+                    'w-full',
+                )}
                 style={{ overflow: 'hidden' }}
                 role="menu"
                 aria-orientation="vertical"
                 aria-labelledby="user-menu"
             >
-                <a
-                    href="#"
-                    className="block border-2 dark:border-gray-800 border-gray-100 px-8 py-2 text-3xl dark:bg-white bg-black dark:text-black text-white dark:hover:bg-gray-100 hover:bg-gray-800"
-                    role="menuitem"
-                >
-                    Logg Inn
-                </a>
-                <a
-                    href="#"
-                    className="block border-2 dark:border-gray-800 border-gray-100 px-8 py-2 text-3xl dark:bg-white bg-black dark:text-black text-white dark:hover:bg-gray-100 hover:bg-gray-800"
-                    role="menuitem"
-                >
-                    Forside
-                </a>
-                <a
-                    href="#"
-                    className="block border-2 dark:border-gray-800 border-gray-100 px-8 py-2 text-3xl dark:bg-white bg-black dark:text-black text-white dark:hover:bg-gray-100 hover:bg-gray-800"
-                    role="menuitem"
-                >
-                    Bedrifter
-                </a>
-                <a
-                    href="/about"
-                    className="block border-2 dark:border-gray-800 border-gray-100 px-8 py-2 text-3xl dark:bg-white bg-black dark:text-black text-white dark:hover:bg-gray-100 hover:bg-gray-800"
-                    role="menuitem"
-                >
-                    Om Tech Talks
-                </a>
+                {menuItems.map((mi) => (
+                    <Link to={mi.to} key={mi.to}>
+                        <div className={classNames('flex', 'justify-between', 'px-4')}>
+                            <span className={classNames('block', 'text-lg', 'p-2', 'font-semibold')}>{mi.title}</span>
+                            <span className={classNames('block', 'text-lg', 'p-2', 'font-extrabold')}>→</span>
+                        </div>
+                    </Link>
+                ))}
             </div>
         </div>
     );

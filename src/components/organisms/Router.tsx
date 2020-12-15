@@ -9,21 +9,24 @@ import classNames from 'classnames';
 import About from './About';
 
 import Navbar from '../molecules/Navbar';
+import { SignedInCtx } from '../../contexts/signedIn';
 
 const Router: React.FC = () => {
     const location = useLocation();
     const signedIn = false;
 
     return (
-        <div className={classNames('dark:bg-black', 'dark:text-white', 'min-h-screen')}>
-            <Navbar title={location.pathname.slice(1)} />
-            <Switch>
-                <Route exact path="/" component={signedIn ? ComingEvents : AllEvents} />
-                <Route exact path="/companies" component={Companies} />
-                <Route path="/event/:id" component={EventDetails} />
-                <Route path="/about" component={About} />
-            </Switch>
-        </div>
+        <SignedInCtx.Provider value={signedIn}>
+            <div className={classNames('dark:bg-black', 'dark:text-white', 'min-h-screen')}>
+                <Navbar title={location.pathname.slice(1)} />
+                <Switch>
+                    <Route exact path="/" component={signedIn ? ComingEvents : AllEvents} />
+                    <Route exact path="/companies" component={Companies} />
+                    <Route path="/event/:id" component={EventDetails} />
+                    <Route path="/about" component={About} />
+                </Switch>
+            </div>
+        </SignedInCtx.Provider>
     );
 };
 

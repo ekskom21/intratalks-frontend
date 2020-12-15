@@ -1,13 +1,15 @@
 import { useQuery } from '@apollo/client';
 import classNames from 'classnames';
 import React from 'react';
-import { Link } from 'react-router-dom';
-import { EVENT, SpecificEvent } from '../../api/queries/eventDetails';
+import { Link, useParams } from 'react-router-dom';
+import { EVENT, SpecificEvent } from '../../api/queries/event';
 
 const EventDetails: React.FC = () => {
+    const { id } = useParams<{ id: string }>();
+
     const { data } = useQuery<SpecificEvent>(EVENT, {
         variables: {
-            _id: 'abcdef',
+            _id: id,
         },
     });
 

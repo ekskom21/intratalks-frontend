@@ -9,7 +9,7 @@ type Props = {
 
 const Member: React.FC<Props> = (props) => {
     return (
-        <div className="p-2 flex space-x-4">
+        <div className="my-2 flex items-center space-x-4">
             <img
                 src={props.image}
                 alt="member-image"

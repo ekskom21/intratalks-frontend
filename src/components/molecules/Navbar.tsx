@@ -1,3 +1,4 @@
+import classNames from 'classnames';
 import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 
@@ -14,8 +15,8 @@ const Navbar: React.FC<Props> = ({ title }) => {
     }, [history.location.pathname]);
 
     return (
-        <div>
-            <nav className="z-10 w-full sticky flex justify-between dark:bg-white bg-black dark:text-black text-white p-4">
+        <div className={classNames('sticky', 'top-0')}>
+            <nav className="z-10 w-full flex justify-between dark:bg-white bg-black dark:text-black text-white p-4">
                 <span className="flex-grow-0">Tech Talks</span>
                 <span className="flex-grow-0">{title}</span>
                 <button className="flex-grow-0"></button>

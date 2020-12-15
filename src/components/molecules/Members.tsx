@@ -48,11 +48,11 @@ const Members: React.FC = () => {
     ];
 
     return (
-        <div>
+        <>
             {allMembers.map((member) => (
-                <Member key={member.id} id={member.id} name={member.name} role={member.role} image={member.image} />
+                <Member key={member.id} {...member} />
             ))}
-        </div>
+        </>
     );
 };
 

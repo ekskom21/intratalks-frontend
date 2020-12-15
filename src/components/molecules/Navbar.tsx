@@ -6,6 +6,8 @@ import { useSignedIn } from '../../contexts/signedIn';
 
 const CLIENT_ID = process.env.REACT_APP_OW_CLIENT_ID as string | undefined;
 const CALLBACK_URI = process.env.REACT_APP_CALLBACK_URI as string | undefined;
+// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+const NONCE = sessionStorage.getItem('nonce')!;
 
 type Props = {
     title: string;
@@ -29,8 +31,7 @@ const Navbar: React.FC<Props> = ({ title }) => {
         },
         {
             title: 'Logg inn',
-            // TODO: Nonce
-            to: `https://online.ntnu.no/openid/authorize?client_id=${CLIENT_ID}&redirect_uri=${CALLBACK_URI}&response_type=code&scope=openid%20onlineweb4%20profile&state=123`,
+            to: `https://online.ntnu.no/openid/authorize?client_id=${CLIENT_ID}&redirect_uri=${CALLBACK_URI}&response_type=code&scope=openid%20onlineweb4%20profile&state=${NONCE}`,
         },
     ];
 

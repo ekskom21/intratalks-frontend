@@ -35,7 +35,7 @@ const ComingEvents: React.FC = () => {
     ];
 
     return (
-        <main className={classNames('p-4')}>
+        <main className={classNames('px-4')}>
             {comingEvents.map((event) => (
                 <Link to={`/event/${event.id}`} key={`${event.title}@${event.time}`}>
                     <section className={classNames('dark:bg-gray-900', 'bg-gray-200', 'my-4', 'p-4', 'rounded-lg')}>

@@ -9,7 +9,7 @@ const Company: React.FC<Props> = (props) => {
     const numPresentations = Math.floor(Math.random() * 4);
 
     return (
-        <Link to="#">
+        <Link to={`/company/${props.company._id}`}>
             <article className={classNames('my-4', 'rounded-lg')}>
                 <h1 className={classNames('text-3xl', 'font-bold', 'mb-0')}>
                     {props.company.name}{' '}

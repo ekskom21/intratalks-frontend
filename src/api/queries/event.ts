@@ -1,8 +1,8 @@
 import { gql } from '@apollo/client';
-import { EventWithCompany } from '../../generated/graphql';
+import { Company, Event } from '../../generated/graphql';
 
 export const EVENT = gql`
-    query($_id: ID!) {
+    query($_id: String!) {
         event(_id: $_id) {
             event {
                 _id
@@ -22,11 +22,15 @@ export const EVENT = gql`
                     primary
                     secondary
                 }
+                description
             }
         }
     }
 `;
 
 export type SpecificEvent = {
-    event: Pick<EventWithCompany, 'event' | 'company'>;
+    event: {
+        event: Event;
+        company: Pick<Company, '_id' | 'colors' | 'description' | 'name'>;
+    };
 };

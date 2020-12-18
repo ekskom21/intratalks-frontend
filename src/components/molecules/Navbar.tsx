@@ -22,7 +22,7 @@ type Props = {
     title: string;
 };
 
-const Navbar: React.FC<Props> = ({ title }) => {
+const Navbar: React.FC<Props> = () => {
     const authData = useSignedIn();
 
     const menuItems: Array<{ title: string; to: string }> = [

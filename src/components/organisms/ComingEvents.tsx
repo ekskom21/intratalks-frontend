@@ -1,15 +1,5 @@
 import classNames from 'classnames';
-import {
-    addHours,
-    differenceInHours,
-    formatDistanceToNow,
-    isAfter,
-    isBefore,
-    isFuture,
-    isPast,
-    sub,
-    subHours,
-} from 'date-fns';
+import { addHours, formatDistanceToNow, isFuture, isPast, subHours } from 'date-fns';
 import { nb } from 'date-fns/locale';
 import React from 'react';
 

@@ -54,8 +54,22 @@ const Navbar: React.FC<Props> = ({ title }) => {
     return (
         <>
             <nav className="sticky z-10 flex justify-between w-full p-4">
-                <span className="flex-grow-0">Tech Talks</span>
-                <span className="flex-grow-0">{title}</span>
+                <Link to="/">
+                    <a
+                        className={classNames(
+                            'flex-grow-0',
+                            'font-extrabold',
+                            'uppercase',
+                            'dark:bg-white',
+                            'bg-black',
+                            'text-white',
+                            'dark:text-black',
+                            'px-1',
+                        )}
+                    >
+                        Tech Talks
+                    </a>
+                </Link>
                 <button className="flex-grow-0"></button>
                 <div className="relative ml-3">
                     <div>
@@ -100,7 +114,10 @@ const Navbar: React.FC<Props> = ({ title }) => {
             >
                 {menuItems.map((mi) => {
                     const inner = (
-                        <div className={classNames('flex', 'justify-between', 'px-4')}>
+                        <div
+                            className={classNames('flex', 'justify-between', 'px-4')}
+                            onClick={() => setShowDropdown(false)}
+                        >
                             <span className={classNames('block', 'text-lg', 'p-2', 'font-semibold')}>{mi.title}</span>
                             <span className={classNames('block', 'text-lg', 'p-2', 'font-extrabold')}>→</span>
                         </div>

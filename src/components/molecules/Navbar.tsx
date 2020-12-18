@@ -109,7 +109,7 @@ const Navbar: React.FC<Props> = ({ title }) => {
                     if (mi.title == 'Logg inn') {
                         return (
                             <a href={mi.to} key={mi.to}>
-                                {mi.to}
+                                {inner}
                             </a>
                         );
                     }

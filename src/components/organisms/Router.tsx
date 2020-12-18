@@ -6,6 +6,7 @@ import EventDetails from './EventDetails';
 import Companies from './Companies';
 import AllEvents from './AllEvents';
 import classNames from 'classnames';
+import About from './About';
 
 import Navbar from '../molecules/Navbar';
 import { SignedInCtx } from '../../contexts/signedIn';
@@ -26,6 +27,7 @@ const Router: React.FC = () => {
                     <Route exact path="/companies" component={Companies} />
                     <Route path="/event/:id" component={EventDetails} />
                     <Route path="/auth-callback" component={AuthenticationCallback} />
+                    <Route path="/about" component={About} />
                 </Switch>
             </div>
         </SignedInCtx.Provider>

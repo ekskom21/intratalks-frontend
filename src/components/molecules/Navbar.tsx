@@ -52,7 +52,7 @@ const Navbar: React.FC<Props> = ({ title }) => {
     }, [history.location.pathname]);
 
     return (
-        <>
+        <div className={classNames('sticky', 'top-0', 'bg-white', 'dark:bg-black')}>
             <nav className="sticky z-10 flex justify-between w-full p-4">
                 <span className="flex-grow-0">Tech Talks</span>
                 <span className="flex-grow-0">{title}</span>
@@ -121,7 +121,7 @@ const Navbar: React.FC<Props> = ({ title }) => {
                     );
                 })}
             </div>
-        </>
+        </div>
     );
 };
 

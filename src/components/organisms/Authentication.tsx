@@ -11,6 +11,9 @@ export const AuthenticationCallback: React.FC = () => {
 
     const code = params.get('code');
 
+    console.log(nonce);
+    console.log(storedNonce);
+
     if (nonce != storedNonce) {
         throw new Error('Nonce has been modified.');
     }

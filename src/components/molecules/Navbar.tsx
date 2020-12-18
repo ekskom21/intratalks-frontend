@@ -7,7 +7,16 @@ import { useSignedIn } from '../../contexts/signedIn';
 const CLIENT_ID = process.env.REACT_APP_OW_CLIENT_ID as string | undefined;
 const CALLBACK_URI = process.env.REACT_APP_CALLBACK_URI as string | undefined;
 // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-const NONCE = sessionStorage.getItem('nonce')!;
+
+// Set nonce. Used for signing in with OAuth.
+let NONCE: string;
+const stored_nonce = sessionStorage.getItem('nonce');
+if (stored_nonce === null) {
+    NONCE = String(Math.random() * 1e10);
+    sessionStorage.setItem('nonce', NONCE);
+} else {
+    NONCE = stored_nonce;
+}
 
 type Props = {
     title: string;
@@ -44,14 +53,14 @@ const Navbar: React.FC<Props> = ({ title }) => {
 
     return (
         <>
-            <nav className="z-10 w-full sticky flex justify-between p-4">
+            <nav className="sticky z-10 flex justify-between w-full p-4">
                 <span className="flex-grow-0">Tech Talks</span>
                 <span className="flex-grow-0">{title}</span>
                 <button className="flex-grow-0"></button>
-                <div className="ml-3 relative">
+                <div className="relative ml-3">
                     <div>
                         <button
-                            className="bg-transparent flex text-sm rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white"
+                            className="flex text-sm bg-transparent rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white"
                             id="user-menu"
                             aria-haspopup="true"
                             onClick={() => setShowDropdown((curr) => !curr)}
@@ -100,7 +109,7 @@ const Navbar: React.FC<Props> = ({ title }) => {
                     if (mi.title == 'Logg inn') {
                         return (
                             <a href={mi.to} key={mi.to}>
-                                {inner}
+                                {mi.to}
                             </a>
                         );
                     }

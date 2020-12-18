@@ -14,11 +14,6 @@ const client = new ApolloClient({
     cache: new InMemoryCache(),
 });
 
-// Set nonce. Used for signing in with OAuth.
-if (!sessionStorage.getItem('nonce')) {
-    sessionStorage.setItem('nonce', String(Math.random() * 1e10));
-}
-
 render(
     <React.StrictMode>
         <ApolloProvider client={client}>

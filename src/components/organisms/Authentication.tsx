@@ -47,13 +47,5 @@ export const AuthenticationCallback: React.FC = () => {
         history.push('/');
     }
 
-    return (
-        <>
-            <button onClick={() => runMutation()}>run</button>
-            <p>{loading}</p>
-            <p>{error}</p>
-            <p>{JSON.stringify(data)}</p>
-            <span>Code: {code}</span>
-        </>
-    );
+    return null;
 };

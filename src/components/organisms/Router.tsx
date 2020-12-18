@@ -10,17 +10,19 @@ import classNames from 'classnames';
 import Navbar from '../molecules/Navbar';
 import { SignedInCtx } from '../../contexts/signedIn';
 import { AuthenticationCallback } from './Authentication';
+import { Tokens } from '../../generated/graphql';
 
 const Router: React.FC = () => {
     const location = useLocation();
-    const signedIn = false;
+
+    const authData = localStorage.getItem('auth_data');
 
     return (
-        <SignedInCtx.Provider value={signedIn}>
+        <SignedInCtx.Provider value={authData !== null ? (JSON.parse(authData) as Tokens) : null}>
             <div className={classNames('dark:bg-black', 'dark:text-white', 'min-h-screen')}>
                 <Navbar title={location.pathname.slice(1)} />
                 <Switch>
-                    <Route exact path="/" component={signedIn ? ComingEvents : AllEvents} />
+                    <Route exact path="/" component={!!authData ? ComingEvents : AllEvents} />
                     <Route exact path="/companies" component={Companies} />
                     <Route path="/event/:id" component={EventDetails} />
                     <Route path="/auth-callback" component={AuthenticationCallback} />

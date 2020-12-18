@@ -23,11 +23,11 @@ type Props = {
 };
 
 const Navbar: React.FC<Props> = ({ title }) => {
-    const isSignedIn = useSignedIn();
+    const authData = useSignedIn();
 
     const menuItems: Array<{ title: string; to: string }> = [
         {
-            title: isSignedIn ? 'Mine events' : 'Alle events',
+            title: !!authData ? 'Mine events' : 'Alle events',
             to: '/',
         },
         {
@@ -107,7 +107,7 @@ const Navbar: React.FC<Props> = ({ title }) => {
                     );
 
                     if (mi.title == 'Logg inn') {
-                        return (
+                        return !!authData ? null : (
                             <a href={mi.to} key={mi.to}>
                                 {inner}
                             </a>

@@ -1,15 +1,28 @@
 import React from 'react';
-import { useLocation } from 'react-router-dom';
+
+import { useMutation } from '@apollo/client';
+import { useHistory, useLocation } from 'react-router-dom';
+
+import { SIGN_IN } from '../../api/mutations/signIn';
+import { Tokens } from '../../generated/graphql';
 
 export const AuthenticationCallback: React.FC = () => {
     const { search } = useLocation();
     const params = new URLSearchParams(search);
 
+    const code = params.get('code');
+
+    const history = useHistory();
+
+    const [runMutation, { loading, data, error }] = useMutation<Tokens>(SIGN_IN, {
+        variables: {
+            code,
+        },
+    });
+
     const nonce = params.get('state');
     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     const storedNonce = sessionStorage.getItem('nonce')!;
-
-    const code = params.get('code');
 
     console.log(nonce);
     console.log(storedNonce);
@@ -18,5 +31,29 @@ export const AuthenticationCallback: React.FC = () => {
         throw new Error('Nonce has been modified.');
     }
 
-    return <h1>Code: {code}</h1>;
+    // If the nonce hasn't been altered, sign us in
+    runMutation();
+
+    if (error) {
+        return <span>Huff og huff, det skjedde visst noe rart: {error.message}</span>;
+    }
+
+    if (loading) {
+        return <span>Logger deg inn!</span>;
+    }
+
+    if (data) {
+        localStorage.setItem('auth_data', JSON.stringify(data));
+        history.push('/');
+    }
+
+    return (
+        <>
+            <button onClick={() => runMutation()}>run</button>
+            <p>{loading}</p>
+            <p>{error}</p>
+            <p>{JSON.stringify(data)}</p>
+            <span>Code: {code}</span>
+        </>
+    );
 };

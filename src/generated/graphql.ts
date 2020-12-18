@@ -1,4 +1,4 @@
-import { GraphQLResolveInfo } from 'graphql';
+import { GraphQLResolveInfo, GraphQLScalarType, GraphQLScalarTypeConfig } from 'graphql';
 export type Maybe<T> = T | null;
 export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] };
 export type RequireFields<T, K extends keyof T> = { [X in Exclude<keyof T, K>]?: T[X] } & { [P in K]-?: NonNullable<T[P]> };
@@ -9,6 +9,33 @@ export type Scalars = {
   Boolean: boolean;
   Int: number;
   Float: number;
+  DateTime: any;
+};
+
+export type Tokens = {
+  __typename?: 'Tokens';
+  access_token: Scalars['String'];
+  id_token: Scalars['String'];
+  refresh_token: Scalars['String'];
+  expires_in: Scalars['Int'];
+};
+
+export type Mutation = {
+  __typename?: 'Mutation';
+  /** Get authentication tokens for OW4 */
+  signIn?: Maybe<Tokens>;
+  /** Refresh your authentication token */
+  refresh?: Maybe<Tokens>;
+};
+
+
+export type MutationSignInArgs = {
+  code: Scalars['String'];
+};
+
+
+export type MutationRefreshArgs = {
+  refresh_token: Scalars['String'];
 };
 
 export enum EventTime {
@@ -73,6 +100,7 @@ export type QueryCompanyArgs = {
 export type QueryEventArgs = {
   _id: Scalars['String'];
 };
+
 
 
 
@@ -152,31 +180,52 @@ export type DirectiveResolverFn<TResult = {}, TParent = {}, TContext = {}, TArgs
 
 /** Mapping between all available schema types and the resolvers types */
 export type ResolversTypes = {
+  Tokens: ResolverTypeWrapper<Tokens>;
+  String: ResolverTypeWrapper<Scalars['String']>;
+  Int: ResolverTypeWrapper<Scalars['Int']>;
+  Mutation: ResolverTypeWrapper<{}>;
   EventTime: EventTime;
   Location: ResolverTypeWrapper<Location>;
   Float: ResolverTypeWrapper<Scalars['Float']>;
-  String: ResolverTypeWrapper<Scalars['String']>;
   Event: ResolverTypeWrapper<Event>;
   ID: ResolverTypeWrapper<Scalars['ID']>;
   ColorSet: ResolverTypeWrapper<ColorSet>;
   Company: ResolverTypeWrapper<Company>;
   EventAndCompany: ResolverTypeWrapper<EventAndCompany>;
   Query: ResolverTypeWrapper<{}>;
+  DateTime: ResolverTypeWrapper<Scalars['DateTime']>;
   Boolean: ResolverTypeWrapper<Scalars['Boolean']>;
 };
 
 /** Mapping between all available schema types and the resolvers parents */
 export type ResolversParentTypes = {
+  Tokens: Tokens;
+  String: Scalars['String'];
+  Int: Scalars['Int'];
+  Mutation: {};
   Location: Location;
   Float: Scalars['Float'];
-  String: Scalars['String'];
   Event: Event;
   ID: Scalars['ID'];
   ColorSet: ColorSet;
   Company: Company;
   EventAndCompany: EventAndCompany;
   Query: {};
+  DateTime: Scalars['DateTime'];
   Boolean: Scalars['Boolean'];
+};
+
+export type TokensResolvers<ContextType = any, ParentType extends ResolversParentTypes['Tokens'] = ResolversParentTypes['Tokens']> = {
+  access_token?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  id_token?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  refresh_token?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  expires_in?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type MutationResolvers<ContextType = any, ParentType extends ResolversParentTypes['Mutation'] = ResolversParentTypes['Mutation']> = {
+  signIn?: Resolver<Maybe<ResolversTypes['Tokens']>, ParentType, ContextType, RequireFields<MutationSignInArgs, 'code'>>;
+  refresh?: Resolver<Maybe<ResolversTypes['Tokens']>, ParentType, ContextType, RequireFields<MutationRefreshArgs, 'refresh_token'>>;
 };
 
 export type LocationResolvers<ContextType = any, ParentType extends ResolversParentTypes['Location'] = ResolversParentTypes['Location']> = {
@@ -222,13 +271,20 @@ export type QueryResolvers<ContextType = any, ParentType extends ResolversParent
   event?: Resolver<Maybe<ResolversTypes['EventAndCompany']>, ParentType, ContextType, RequireFields<QueryEventArgs, '_id'>>;
 };
 
+export interface DateTimeScalarConfig extends GraphQLScalarTypeConfig<ResolversTypes['DateTime'], any> {
+  name: 'DateTime';
+}
+
 export type Resolvers<ContextType = any> = {
+  Tokens?: TokensResolvers<ContextType>;
+  Mutation?: MutationResolvers<ContextType>;
   Location?: LocationResolvers<ContextType>;
   Event?: EventResolvers<ContextType>;
   ColorSet?: ColorSetResolvers<ContextType>;
   Company?: CompanyResolvers<ContextType>;
   EventAndCompany?: EventAndCompanyResolvers<ContextType>;
   Query?: QueryResolvers<ContextType>;
+  DateTime?: GraphQLScalarType;
 };
 
 

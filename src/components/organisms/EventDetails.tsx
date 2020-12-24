@@ -13,12 +13,12 @@ const EventDetails: React.FC = () => {
         },
     });
 
-    if (!data) return <span>loading...</span>;
+    if (!data) return <span>Loading...</span>;
 
     const { event } = data;
 
     return (
-        <main className={classNames('p-4')}>
+        <>
             <Link to={`/company/${event.company._id}`}>
                 <span
                     className={classNames(
@@ -44,7 +44,7 @@ const EventDetails: React.FC = () => {
             <strong className={classNames('text-sm', 'font-bold')}>{event.event.location.name}</strong>
 
             <p className={classNames('mt-4')}>{event.event.description}</p>
-        </main>
+        </>
     );
 };
 

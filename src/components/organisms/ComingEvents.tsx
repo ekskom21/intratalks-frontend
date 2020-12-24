@@ -1,4 +1,6 @@
 import classNames from 'classnames';
+import { addHours, formatDistanceToNow, isFuture, isPast, subHours } from 'date-fns';
+import { nb } from 'date-fns/locale';
 import React from 'react';
 
 import { Link } from 'react-router-dom';
@@ -7,7 +9,8 @@ const ComingEvents: React.FC = () => {
     const comingEvents = [
         {
             id: 0,
-            time: '09:00 - 12:00',
+            time: subHours(new Date(), 4),
+            duration: 3,
             company: { name: 'Bekk', gradient: 'from-purple-400 to-red-500' },
             title: 'Introduksjon til Elm',
             description:
@@ -16,7 +19,8 @@ const ComingEvents: React.FC = () => {
         },
         {
             id: 1,
-            time: '13:00 - 15:00',
+            time: subHours(new Date(), 1),
+            duration: 2,
             company: { name: 'Kodeworks', gradient: 'from-red-500 to-yellow-400' },
             title: 'Dytte Data',
             description:
@@ -25,7 +29,8 @@ const ComingEvents: React.FC = () => {
         },
         {
             id: 2,
-            time: '19:00-23:59',
+            time: addHours(new Date(), 5),
+            duration: 5,
             company: { name: 'Netlight', gradient: 'from-blue-400 to-green-500' },
             title: 'Kaffekok 101',
             description:
@@ -35,36 +40,72 @@ const ComingEvents: React.FC = () => {
     ];
 
     return (
-        <main className={classNames('px-4')}>
-            {comingEvents.map((event) => (
-                <Link to={`/event/${event.id}`} key={`${event.title}@${event.time}`}>
-                    <section className={classNames('dark:bg-gray-900', 'bg-gray-200', 'my-4', 'p-4', 'rounded-lg')}>
-                        <div
-                            style={event.time != '13:00 - 15:00' ? { filter: 'grayscale(1)' } : {}}
+        <>
+            {comingEvents.map((event) => {
+                const hasPassed = isPast(addHours(event.time, event.duration));
+                const isNow = isPast(event.time) && isFuture(addHours(event.time, event.duration));
+
+                return (
+                    <Link to={`/event/${event.id}`} key={`${event.title}@${event.time}`}>
+                        <section
                             className={classNames(
-                                'bg-gradient-to-r',
-                                event.company.gradient,
-                                event.time == '13:00 - 15:00' && 'animate-pulse',
-                                'h-2 rounded-full mb-2',
+                                'dark:border-gray-800',
+                                'border-2',
+                                'border-gray-100',
+                                'mb-4',
+                                'p-4',
+                                'rounded-md',
                             )}
-                        ></div>
+                        >
+                            <small className={classNames('dark:text-gray-300', 'text-sm')}>
+                                {isNow && (
+                                    <span className="inline-flex w-3 h-3 mr-1">
+                                        <span className="absolute inline-flex w-2 h-2 bg-green-400 rounded-full opacity-75 animate-ping"></span>
+                                        <span className="relative inline-flex w-2 h-2 bg-green-500 rounded-full"></span>
+                                    </span>
+                                )}
+                                {isNow ? 'pågår nå' : formatDistanceToNow(event.time, { addSuffix: true, locale: nb })}
+                            </small>
 
-                        <small className={classNames('dark:text-gray-300', 'text-sm')}>
-                            {event.time} · {event.company.name}
-                        </small>
+                            <h3
+                                style={{ filter: `saturate(${hasPassed ? 0 : 1})` }}
+                                className={classNames(
+                                    'text-2xl',
+                                    'font-extrabold',
+                                    'bg-gradient-to-r',
+                                    event.company.gradient,
+                                    'text-transparent',
+                                    'bg-clip-text',
+                                )}
+                            >
+                                {event.title}
+                            </h3>
 
-                        <h3 className={classNames('text-2xl')}>{event.title}</h3>
-
-                        {event.time != '09:00 - 12:00' ? (
-                            <>
-                                <strong className={classNames('text-sm', 'font-bold')}>{event.location}</strong>
-                                <p className={classNames('dark:text-gray-400')}>{event.description}</p>
-                            </>
-                        ) : null}
-                    </section>
-                </Link>
-            ))}
-        </main>
+                            {!hasPassed ? (
+                                <>
+                                    <span className={classNames('text-sm')}>
+                                        på {event.location} med {event.company.name}
+                                    </span>
+                                    <p className={classNames('dark:text-gray-400 text-gray-500')}>
+                                        {event.description}{' '}
+                                        <span
+                                            className={classNames(
+                                                'bg-gradient-to-r',
+                                                event.company.gradient,
+                                                'text-transparent',
+                                                'bg-clip-text',
+                                            )}
+                                        >
+                                            →
+                                        </span>
+                                    </p>
+                                </>
+                            ) : null}
+                        </section>
+                    </Link>
+                );
+            })}
+        </>
     );
 };
 

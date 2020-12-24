@@ -10,7 +10,7 @@ const Company: React.FC<Props> = (props) => {
 
     return (
         <Link to={`/company/${props.company._id}`}>
-            <article className={classNames('my-4', 'rounded-lg')}>
+            <article className={classNames('mb-4', 'rounded-lg')}>
                 <h1 className={classNames('text-3xl', 'font-bold', 'mb-0')}>
                     {props.company.name}{' '}
                     <span

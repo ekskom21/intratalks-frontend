@@ -1,11 +1,13 @@
 import React from 'react';
+
 import { Switch, Route, useLocation } from 'react-router-dom';
+import classNames from 'classnames';
 
 import ComingEvents from './ComingEvents';
 import EventDetails from './EventDetails';
 import Companies from './Companies';
 import AllEvents from './AllEvents';
-import classNames from 'classnames';
+import Page from './Page';
 import About from './About';
 
 import Navbar from '../molecules/Navbar';
@@ -23,11 +25,13 @@ const Router: React.FC = () => {
             <div className={classNames('dark:bg-black', 'dark:text-white', 'min-h-screen')}>
                 <Navbar title={location.pathname.slice(1)} />
                 <Switch>
-                    <Route exact path="/" component={!!authData ? ComingEvents : AllEvents} />
-                    <Route exact path="/companies" component={Companies} />
-                    <Route path="/event/:id" component={EventDetails} />
-                    <Route path="/auth-callback" component={AuthenticationCallback} />
-                    <Route path="/about" component={About} />
+                    <Page>
+                        <Route exact path="/" component={!!authData ? ComingEvents : AllEvents} />
+                        <Route exact path="/companies" component={Companies} />
+                        <Route path="/event/:id" component={EventDetails} />{' '}
+                        <Route path="/auth-callback" component={AuthenticationCallback} />
+                        <Route path="/about" component={About} />
+                    </Page>
                 </Switch>
             </div>
         </SignedInCtx.Provider>

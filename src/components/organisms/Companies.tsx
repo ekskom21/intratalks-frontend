@@ -1,5 +1,4 @@
 import { useQuery } from '@apollo/client';
-import classNames from 'classnames';
 import React from 'react';
 import { AllCompanies, ALL_COMPANIES } from '../../api/queries/companies';
 import Company from '../molecules/Company';
@@ -12,11 +11,11 @@ const Companies: React.FC = () => {
     }
 
     return (
-        <main className={classNames('pb-4', 'px-4')}>
+        <>
             {data.companies.map((company) => (
                 <Company key={company._id} company={company} />
             ))}
-        </main>
+        </>
     );
 };
 

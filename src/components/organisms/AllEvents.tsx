@@ -9,10 +9,10 @@ import SmallEvent from '../atoms/SmallEvent';
 const AllEvents: React.FC = () => {
     const { data } = useQuery<AllCompanies>(ALL_COMPANIES);
 
-    if (!data) return <span>loading...</span>;
+    if (!data) return <span>Loading...</span>;
 
     return (
-        <main className={classNames('p-4')}>
+        <>
             <h2 className={classNames('text-3xl', 'font-bold')}>Frokost</h2>
             {data.companies
                 .flatMap((c) => c.events.map((e) => ({ event: e, company: c })))
@@ -36,7 +36,7 @@ const AllEvents: React.FC = () => {
                 .map(({ event, company }) => (
                     <SmallEvent event={event} company={company} key={event._id} />
                 ))}
-        </main>
+        </>
     );
 };
 

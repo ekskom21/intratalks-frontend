@@ -6,8 +6,6 @@ import { AllCompanies } from '../../api/queries/companies';
 type Props = { company: AllCompanies['companies'][number] };
 
 const Company: React.FC<Props> = (props) => {
-    const numPresentations = Math.floor(Math.random() * 4);
-
     return (
         <Link to={`/company/${props.company._id}`}>
             <article className={classNames('mb-4', 'rounded-lg')}>
@@ -40,8 +38,8 @@ const Company: React.FC<Props> = (props) => {
                     )}
                 ></div>
                 <small className={classNames("dark:text-gray-300','text-sm','mb-3")}>
-                    {numPresentations > 0
-                        ? numPresentations + ' kommende arrangementer'
+                    {props.company.events.length > 0
+                        ? props.company.events.length + ' kommende arrangementer'
                         : 'Ingen kommende arrangementer'}
                 </small>
             </article>

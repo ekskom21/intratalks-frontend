@@ -4,7 +4,7 @@ import Members from '../molecules/Members';
 
 const About: React.FC = () => {
     return (
-        <div className="p-4">
+        <>
             <h1 className={classNames('text-3xl', 'font-bold', 'mb-2')}>Kontakt</h1>
             <div>
                 <strong>Mail</strong>:{' '}
@@ -48,7 +48,7 @@ const About: React.FC = () => {
 
             <h1 className={classNames('text-3xl', 'font-bold', 'mt-4')}>Medlemmer</h1>
             <Members />
-        </div>
+        </>
     );
 };
 export default About;

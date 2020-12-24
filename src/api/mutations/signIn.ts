@@ -12,6 +12,6 @@ export const SIGN_IN = gql`
     }
 `;
 
-export type AllCompanies = {
+export type SignInResponse = {
     signIn: Tokens;
 };

@@ -55,7 +55,7 @@ const Navbar: React.FC<Props> = () => {
         <div className={classNames('sticky', 'top-0', 'bg-white', 'dark:bg-black')}>
             <nav className="sticky z-10 flex justify-between w-full p-4">
                 <Link to="/">
-                    <a
+                    <span
                         className={classNames(
                             'flex-grow-0',
                             'font-extrabold',
@@ -68,7 +68,7 @@ const Navbar: React.FC<Props> = () => {
                         )}
                     >
                         Tech Talks
-                    </a>
+                    </span>
                 </Link>
                 <button className="flex-grow-0"></button>
                 <div className="relative ml-3">

@@ -52,7 +52,7 @@ const Navbar: React.FC<Props> = () => {
     }, [history.location.pathname]);
 
     return (
-        <>
+        <div className={classNames('sticky', 'top-0', 'bg-white', 'dark:bg-black')}>
             <nav className="sticky z-10 flex justify-between w-full p-4">
                 <Link to="/">
                     <a
@@ -138,7 +138,7 @@ const Navbar: React.FC<Props> = () => {
                     );
                 })}
             </div>
-        </>
+        </div>
     );
 };
 

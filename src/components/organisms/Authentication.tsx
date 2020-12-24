@@ -24,9 +24,6 @@ export const AuthenticationCallback: React.FC = () => {
     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     const storedNonce = sessionStorage.getItem('nonce')!;
 
-    console.log(nonce);
-    console.log(storedNonce);
-
     if (nonce != storedNonce) {
         throw new Error('Nonce has been modified.');
     }

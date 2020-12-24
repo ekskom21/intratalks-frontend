@@ -14,7 +14,7 @@ export const AuthenticationCallback: React.FC = () => {
 
     const history = useHistory();
 
-    const [runMutation, { loading, data, error }] = useMutation<Tokens>(SIGN_IN, {
+    const [runMutation, { loading, data, error, called }] = useMutation<Tokens>(SIGN_IN, {
         variables: {
             code,
         },
@@ -29,7 +29,7 @@ export const AuthenticationCallback: React.FC = () => {
     }
 
     // If the nonce hasn't been altered, sign us in
-    runMutation();
+    if (!error && !loading && !called) runMutation();
 
     if (error) {
         return <span>Huff og huff, det skjedde visst noe rart: {error.message}</span>;

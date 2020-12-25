@@ -35,12 +35,7 @@ const Foo: React.FC = () => {
                 <p>{company.description}</p>
                 <h2 className={classNames('text-xl', 'font-bold', 'py-4')}>Arrangementer</h2>
 
-                {/* -temporary-  
-                    Can't map to SmallEvent.tsx because company.events is Event[] but SmallEvent
-                    uses EventWithCompany which has an Event and a CondensedCompany. This seems unnecessary.
-                    Is it possible to replace CondensedCompany with Company (and just not use some of the fields), 
-                    and/or replace EventWithCompany with separate Event and Company? */}
-                {company.events && company.events.length > 10 ? (
+                {company.events ? (
                     company.events.map((ev) => <p key={ev?._id}>{ev && ev._id}</p>)
                 ) : (
                     <p className={classNames('dark:text-gray-400 text-gray-600 italic')}>

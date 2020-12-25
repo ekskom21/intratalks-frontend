@@ -6,7 +6,7 @@ import { SpecificCompany, COMPANY } from '../../api/queries/companies';
 
 import classNames from 'classnames';
 
-const Foo: React.FC = () => {
+const Company: React.FC = () => {
     const { id } = useParams<{ id: string }>();
 
     const { data, loading, error } = useQuery<SpecificCompany>(COMPANY, {
@@ -47,4 +47,4 @@ const Foo: React.FC = () => {
     );
 };
 
-export default Foo;
+export default Company;

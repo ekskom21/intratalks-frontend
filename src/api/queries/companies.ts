@@ -6,6 +6,17 @@ export const ALL_COMPANIES = gql`
         companies {
             _id
             name
+            events {
+                _id
+                title
+                time
+                location {
+                    lat
+                    lng
+                    name
+                }
+                description
+            }
             colors {
                 primary
                 secondary
@@ -31,7 +42,7 @@ export const COMPANY = gql`
 `;
 
 export type AllCompanies = {
-    companies: Array<Pick<Company, '_id' | 'name' | 'colors'>>;
+    companies: Array<Company>;
 };
 
 export type SpecificCompany = {

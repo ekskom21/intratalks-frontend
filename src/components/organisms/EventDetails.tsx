@@ -1,22 +1,24 @@
 import { useQuery } from '@apollo/client';
 import classNames from 'classnames';
 import React from 'react';
-import { Link } from 'react-router-dom';
-import { EVENT, SpecificEvent } from '../../api/queries/eventDetails';
+import { Link, useParams } from 'react-router-dom';
+import { EVENT, SpecificEvent } from '../../api/queries/event';
 
 const EventDetails: React.FC = () => {
+    const { id } = useParams<{ id: string }>();
+
     const { data } = useQuery<SpecificEvent>(EVENT, {
         variables: {
-            _id: 'abcdef',
+            _id: id,
         },
     });
 
-    if (!data) return <span>loading...</span>;
+    if (!data) return <span>Loading...</span>;
 
     const { event } = data;
 
     return (
-        <main className={classNames('p-4')}>
+        <>
             <Link to={`/company/${event.company._id}`}>
                 <span
                     className={classNames(
@@ -42,7 +44,7 @@ const EventDetails: React.FC = () => {
             <strong className={classNames('text-sm', 'font-bold')}>{event.event.location.name}</strong>
 
             <p className={classNames('mt-4')}>{event.event.description}</p>
-        </main>
+        </>
     );
 };
 

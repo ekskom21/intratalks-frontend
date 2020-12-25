@@ -26,7 +26,7 @@ export const ALL_COMPANIES = gql`
 `;
 
 export const COMPANY = gql`
-    query($_id: ID!) {
+    query($_id: String!) {
         company(_id: $_id) {
             name
             colors {

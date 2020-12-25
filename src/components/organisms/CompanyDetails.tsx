@@ -34,8 +34,7 @@ const Company: React.FC = () => {
             <div className={classNames('p-4')}>
                 <h1 className={classNames('text-3xl', 'font-light', 'py-2')}>{company.name}</h1>
                 <p>{company.description}</p>
-                <h2 className={classNames('text-xl', 'font-bold', 'py-4')}>Arrangementer</h2>
-
+                <h2 className={classNames('text-xl', 'font-bold', 'pt-4')}>Arrangementer</h2>
                 {company.events ? (
                     company.events.map((ev) => <SmallEvent key={ev._id} company={company} event={ev} />)
                 ) : (

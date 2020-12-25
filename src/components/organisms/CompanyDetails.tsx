@@ -39,7 +39,7 @@ const Company: React.FC = () => {
                 {company.events ? (
                     company.events.map((ev) => <SmallEvent key={ev._id} company={company} event={ev} />)
                 ) : (
-                    <p className={classNames('dark:text-gray-400 text-gray-600 italic')}>
+                    <p className={classNames('dark:text-gray-400', 'text-gray-600 italic')}>
                         Denne bedriften har ingen arrangementer...
                     </p>
                 )}

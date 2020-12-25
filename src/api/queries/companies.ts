@@ -28,6 +28,7 @@ export const ALL_COMPANIES = gql`
 export const COMPANY = gql`
     query($_id: String!) {
         company(_id: $_id) {
+            _id
             name
             colors {
                 primary
@@ -36,6 +37,14 @@ export const COMPANY = gql`
             description
             events {
                 _id
+                title
+                time
+                location {
+                    name
+                    lat
+                    lng
+                }
+                description
             }
         }
     }
@@ -46,5 +55,5 @@ export type AllCompanies = {
 };
 
 export type SpecificCompany = {
-    company: Pick<Company, 'name' | 'colors' | 'description' | 'events'>;
+    company: Pick<Company, '_id' | 'name' | 'colors' | 'description' | 'events'>;
 };

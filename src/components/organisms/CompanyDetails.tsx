@@ -5,6 +5,7 @@ import { useQuery } from '@apollo/client';
 import { SpecificCompany, COMPANY } from '../../api/queries/companies';
 
 import classNames from 'classnames';
+import SmallEvent from '../atoms/SmallEvent';
 
 const Company: React.FC = () => {
     const { id } = useParams<{ id: string }>();
@@ -36,7 +37,7 @@ const Company: React.FC = () => {
                 <h2 className={classNames('text-xl', 'font-bold', 'py-4')}>Arrangementer</h2>
 
                 {company.events ? (
-                    company.events.map((ev) => <p key={ev?._id}>{ev && ev._id}</p>)
+                    company.events.map((ev) => <SmallEvent key={ev._id} company={company} event={ev} />)
                 ) : (
                     <p className={classNames('dark:text-gray-400 text-gray-600 italic')}>
                         Denne bedriften har ingen arrangementer...

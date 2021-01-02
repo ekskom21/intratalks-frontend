@@ -1,12 +1,14 @@
 import React from 'react';
 
-import Select from 'react-select';
+import Select, { ValueType } from 'react-select';
 import classNames from 'classnames';
-import { useQuery } from '@apollo/client';
+import { useMutation, useQuery } from '@apollo/client';
 
 import { AllCompanies, ALL_COMPANIES } from '../../api/queries/companies';
 import { DesiredEvents as DesiredEventsT, DESIRED_EVENTS } from '../../api/queries/desiredEvents';
-import { Event } from '../../generated/graphql';
+import { RegisterInterest, REGISTER_INTEREST } from '../../api/mutations/registerInterest';
+
+import { Event, MutationRegisterInterestArgs } from '../../generated/graphql';
 
 const DesiredEvents: React.FC = () => {
     const { data, loading, error } = useQuery<AllCompanies>(ALL_COMPANIES);
@@ -15,6 +17,10 @@ const DesiredEvents: React.FC = () => {
         loading: desiredEventsLoading,
         error: desiredEventsError,
     } = useQuery<DesiredEventsT>(DESIRED_EVENTS);
+    const [registerInterest, { loading: mutationLoading }] = useMutation<
+        RegisterInterest,
+        MutationRegisterInterestArgs
+    >(REGISTER_INTEREST);
 
     const events = React.useMemo(() => {
         const baseMap = {
@@ -59,12 +65,18 @@ const DesiredEvents: React.FC = () => {
     const lunch = desiredEventsData?.desiredEvents.lunch;
     const dinner = desiredEventsData?.desiredEvents.dinner;
 
+    const onChange = (value: ValueType<{ label: string; value: string }, false>) => {
+        if (!value) return;
+        registerInterest({ variables: { event_id: value.value } });
+    };
+
     return (
         <>
             <h2 className={classNames('text-2xl', 'font-bold', 'mt-4')}>Ønsker</h2>
-            <small>Ønskene dine blir automatisk lagret.</small>
+            <small>{mutationLoading ? 'Ønskene dine lagres…' : 'Ønskene dine blir automatisk lagret.'}</small>
 
             <Select
+                onChange={onChange}
                 defaultValue={
                     breakfast
                         ? // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
@@ -76,6 +88,7 @@ const DesiredEvents: React.FC = () => {
                 options={events.BREAKFAST.map((event) => ({ label: event.title, value: event._id }))}
             />
             <Select
+                onChange={onChange}
                 defaultValue={
                     lunch
                         ? // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
@@ -87,6 +100,7 @@ const DesiredEvents: React.FC = () => {
                 options={events.LUNCH.map((event) => ({ label: event.title, value: event._id }))}
             />
             <Select
+                onChange={onChange}
                 defaultValue={
                     dinner
                         ? // eslint-disable-next-line @typescript-eslint/no-non-null-assertion

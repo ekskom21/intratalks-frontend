@@ -25,7 +25,7 @@ type Props = {
 const Navbar: React.FC<Props> = () => {
     const authData = useSignedIn();
 
-    const menuItems: Array<{ title: string; to: string }> = [
+    const menuItems: Array<{ title: string; to: string; requiresAuth?: boolean }> = [
         {
             title: !!authData ? 'Mine events' : 'Alle events',
             to: '/',
@@ -42,6 +42,11 @@ const Navbar: React.FC<Props> = () => {
             title: 'Logg inn',
             to: `https://online.ntnu.no/openid/authorize?client_id=${CLIENT_ID}&redirect_uri=${CALLBACK_URI}&response_type=code&scope=openid%20onlineweb4%20profile&state=${NONCE}`,
         },
+        {
+            title: 'Profil',
+            to: '/profile',
+            requiresAuth: true,
+        },
     ];
 
     const [showDropdown, setShowDropdown] = useState(false);
@@ -55,20 +60,7 @@ const Navbar: React.FC<Props> = () => {
         <div className={classNames('sticky', 'top-0', 'bg-white', 'dark:bg-black')}>
             <nav className="sticky z-10 flex justify-between w-full p-4">
                 <Link to="/">
-                    <span
-                        className={classNames(
-                            'flex-grow-0',
-                            'font-extrabold',
-                            'uppercase',
-                            'dark:bg-gray-500',
-                            'bg-gray-400',
-                            'text-white',
-                            'dark:text-black',
-                            'px-1',
-                        )}
-                    >
-                        Tech Talks
-                    </span>
+                    <span className={classNames('flex-grow-0', 'font-extrabold', 'uppercase', 'px-1')}>Tech Talks</span>
                 </Link>
                 <button className="flex-grow-0"></button>
                 <div className="relative ml-3">
@@ -100,9 +92,8 @@ const Navbar: React.FC<Props> = () => {
             <div
                 className={classNames(
                     showDropdown ? 'max-h-full' : 'max-h-0',
-                    showDropdown && 'py-2',
                     'border-t',
-                    showDropdown && 'border-b',
+                    showDropdown && ['border-b', 'py-2'],
                     'border-black',
                     'dark:border-white',
                     'w-full',
@@ -122,6 +113,10 @@ const Navbar: React.FC<Props> = () => {
                             <span className={classNames('block', 'text-lg', 'p-2', 'font-extrabold')}>→</span>
                         </div>
                     );
+
+                    if (mi.requiresAuth && !authData) {
+                        return null;
+                    }
 
                     if (mi.title == 'Logg inn') {
                         return !!authData ? null : (

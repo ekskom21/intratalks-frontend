@@ -6,6 +6,10 @@ import { useHistory, useLocation } from 'react-router-dom';
 import { SIGN_IN } from '../../api/mutations/signIn';
 import { Tokens } from '../../generated/graphql';
 
+export type TimestampedTokens = Tokens & {
+    timestamp: string;
+};
+
 export const AuthenticationCallback: React.FC = () => {
     const { search } = useLocation();
     const params = new URLSearchParams(search);
@@ -14,7 +18,7 @@ export const AuthenticationCallback: React.FC = () => {
 
     const history = useHistory();
 
-    const [runMutation, { loading, data, error, called }] = useMutation<Tokens>(SIGN_IN, {
+    const [runMutation, { loading, data, error, called }] = useMutation<{ signIn: Tokens }>(SIGN_IN, {
         variables: {
             code,
         },
@@ -40,7 +44,7 @@ export const AuthenticationCallback: React.FC = () => {
     }
 
     if (data) {
-        localStorage.setItem('auth_data', JSON.stringify(data));
+        localStorage.setItem('auth_data', JSON.stringify({ ...data.signIn, timestamp: new Date() }));
         history.push('/');
     }
 

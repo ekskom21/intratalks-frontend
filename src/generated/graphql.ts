@@ -12,6 +12,12 @@ export type Scalars = {
   DateTime: any;
 };
 
+export enum RegistrationState {
+  Registered = 'REGISTERED',
+  WaitList = 'WAIT_LIST',
+  NotRegistered = 'NOT_REGISTERED'
+}
+
 export type Tokens = {
   __typename?: 'Tokens';
   access_token: Scalars['String'];
@@ -89,6 +95,8 @@ export type Query = {
   company?: Maybe<Company>;
   /** Get a single event. */
   event?: Maybe<EventAndCompany>;
+  /** Check registration state of a user */
+  userRegistered: RegistrationState;
 };
 
 
@@ -180,6 +188,7 @@ export type DirectiveResolverFn<TResult = {}, TParent = {}, TContext = {}, TArgs
 
 /** Mapping between all available schema types and the resolvers types */
 export type ResolversTypes = {
+  RegistrationState: RegistrationState;
   Tokens: ResolverTypeWrapper<Tokens>;
   String: ResolverTypeWrapper<Scalars['String']>;
   Int: ResolverTypeWrapper<Scalars['Int']>;
@@ -269,6 +278,7 @@ export type QueryResolvers<ContextType = any, ParentType extends ResolversParent
   companies?: Resolver<Array<Maybe<ResolversTypes['Company']>>, ParentType, ContextType>;
   company?: Resolver<Maybe<ResolversTypes['Company']>, ParentType, ContextType, RequireFields<QueryCompanyArgs, '_id'>>;
   event?: Resolver<Maybe<ResolversTypes['EventAndCompany']>, ParentType, ContextType, RequireFields<QueryEventArgs, '_id'>>;
+  userRegistered?: Resolver<ResolversTypes['RegistrationState'], ParentType, ContextType>;
 };
 
 export interface DateTimeScalarConfig extends GraphQLScalarTypeConfig<ResolversTypes['DateTime'], any> {

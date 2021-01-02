@@ -39,7 +39,7 @@ const EventDetails: React.FC = () => {
 
             <small className={classNames('dark:text-gray-300', 'text-sm', 'block')}>{event.event.time}</small>
 
-            <h2 className={classNames('text-3xl')}>{event.event.title}</h2>
+            <h2 className={classNames('font-bold', 'text-2xl')}>{event.event.title}</h2>
 
             <strong className={classNames('text-sm', 'font-bold')}>{event.event.location.name}</strong>
 

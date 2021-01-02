@@ -60,20 +60,7 @@ const Navbar: React.FC<Props> = () => {
         <div className={classNames('sticky', 'top-0', 'bg-white', 'dark:bg-black')}>
             <nav className="sticky z-10 flex justify-between w-full p-4">
                 <Link to="/">
-                    <span
-                        className={classNames(
-                            'flex-grow-0',
-                            'font-extrabold',
-                            'uppercase',
-                            'dark:bg-gray-500',
-                            'bg-gray-400',
-                            'text-white',
-                            'dark:text-black',
-                            'px-1',
-                        )}
-                    >
-                        Tech Talks
-                    </span>
+                    <span className={classNames('flex-grow-0', 'font-extrabold', 'uppercase', 'px-1')}>Tech Talks</span>
                 </Link>
                 <button className="flex-grow-0"></button>
                 <div className="relative ml-3">

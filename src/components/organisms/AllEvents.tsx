@@ -1,7 +1,6 @@
 import React from 'react';
 
 import { useQuery } from '@apollo/client';
-import classNames from 'classnames';
 
 import { AllCompanies, ALL_COMPANIES } from '../../api/queries/companies';
 import SmallEvent from '../atoms/SmallEvent';
@@ -13,7 +12,7 @@ const AllEvents: React.FC = () => {
 
     return (
         <>
-            <h2 className={classNames('text-3xl', 'font-bold')}>Frokost</h2>
+            <h2 className="title-2">Frokost</h2>
             {data.companies
                 .flatMap((c) => c.events.map((e) => ({ event: e, company: c })))
                 .filter(({ event: { time } }) => time === 'BREAKFAST')
@@ -21,7 +20,7 @@ const AllEvents: React.FC = () => {
                     <SmallEvent event={event} company={company} key={event._id} />
                 ))}
 
-            <h2 className={classNames('text-3xl', 'font-bold', 'mt-4')}>Lunsj</h2>
+            <h2 className="title-2">Lunsj</h2>
             {data.companies
                 .flatMap((c) => c.events.map((e) => ({ event: e, company: c })))
                 .filter(({ event: { time } }) => time === 'LUNCH')
@@ -29,7 +28,7 @@ const AllEvents: React.FC = () => {
                     <SmallEvent event={event} company={company} key={event._id} />
                 ))}
 
-            <h2 className={classNames('text-3xl', 'font-bold', 'mt-4')}>Middag</h2>
+            <h2 className="title-2">Middag</h2>
             {data.companies
                 .flatMap((c) => c.events.map((e) => ({ event: e, company: c })))
                 .filter(({ event: { time } }) => time === 'DINNER')

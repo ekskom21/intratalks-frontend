@@ -37,13 +37,13 @@ const EventDetails: React.FC = () => {
                 </span>
             </Link>
 
-            <small className={classNames('dark:text-gray-300', 'text-sm', 'block')}>{event.event.time}</small>
+            <small className={classNames('dark:text-gray-300', 'text-sm', 'block')}>{event.time}</small>
 
-            <h2 className={classNames('font-bold', 'text-2xl')}>{event.event.title}</h2>
+            <h2 className={classNames('font-bold', 'text-2xl')}>{event.title}</h2>
 
-            <strong className={classNames('text-sm', 'font-bold')}>{event.event.location.name}</strong>
+            <strong className={classNames('text-sm', 'font-bold')}>{event.location.name}</strong>
 
-            <p className={classNames('mt-4')}>{event.event.description}</p>
+            <p className={classNames('mt-4')}>{event.description}</p>
         </>
     );
 };

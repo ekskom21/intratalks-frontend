@@ -20,7 +20,8 @@ const authLink = setContext(async (_, { headers }) => {
     if (!tokens) return headers;
 
     // Has the access_token expired? If so we need to get a new one
-    if (isPast(addSeconds(new Date(tokens.timestamp), tokens.expires_in))) {
+    // The id_token expires before the access_token, so we use the expiry for that one
+    if (isPast(addSeconds(new Date(tokens.timestamp), 600 /*tokens.expires_in*/))) {
         // Retrieve new access_token
         const resp = await fetch(`http://localhost:4000/`, {
             headers: {

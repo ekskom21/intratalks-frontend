@@ -9,7 +9,21 @@ const SignOutButton: React.FC = () => {
     return (
         <button
             onClick={signOut}
-            className={classNames('mt-4', 'bg-red-700', 'text-white', 'p-2', 'rounded-md', 'font-bold')}
+            className={classNames(
+                'py-2',
+                'px-4',
+                'bg-red-500',
+                'text-white',
+                'font-semibold',
+                'rounded-lg',
+                'shadow-md',
+                'hover:bg-red-700',
+                'focus:outline-none',
+                'focus:ring-2',
+                'focus:ring-green-400',
+                'focus:ring-opacity-75',
+                'mt-4',
+            )}
         >
             Logg ut
         </button>

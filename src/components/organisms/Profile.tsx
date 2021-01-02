@@ -59,7 +59,9 @@ const Profile: React.FC = () => {
                     'flex',
                     'rounded-md',
                     'w-full',
-                    registrationState && TRANSLATION[registrationState.userRegistered].color,
+                    registrationState
+                        ? TRANSLATION[registrationState.userRegistered].color
+                        : ['dark:bg-white', 'bg-black'],
                     'text-black',
                 )}
             >
@@ -73,36 +75,36 @@ const Profile: React.FC = () => {
                 </span>
             </div>
 
-            {loading || regLoading || !data || !registrationState ? (
+            {loading || regLoading ? (
                 <p className="mt-4">Laster arrangementer…</p>
             ) : error || regError ? (
                 <p className="mt-4">
-                    Kunne ikke laste arrangementer: {error?.message}. {regError?.message}. Vennligst forsøk å laste inn
-                    siden på nytt.
+                    Kunne ikke laste arrangementer: {[regError?.message, error?.message].flatMap((e) => e).join(' ')}
+                    Vennligst forsøk å laste inn siden på nytt.
                 </p>
             ) : (
                 <>
                     <h2 className={classNames('text-2xl', 'font-bold', 'mt-4')}>Ønsker</h2>
                     <small>
-                        {registrationState.userRegistered === 'REGISTERED'
+                        {registrationState?.userRegistered === 'REGISTERED'
                             ? 'Ønskene dine blir automatisk lagret.'
                             : 'Du må være påmeldt TechTalks for å registere ønskene dine.'}
                     </small>
 
                     <Select
-                        isDisabled={registrationState.userRegistered !== 'REGISTERED'}
+                        isDisabled={registrationState?.userRegistered !== 'REGISTERED'}
                         className={classNames('text-black', 'mt-2')}
                         placeholder="Velg et frokostarrangement"
                         options={events.BREAKFAST.map((event) => ({ label: event.title, value: event._id }))}
                     />
                     <Select
-                        isDisabled={registrationState.userRegistered !== 'REGISTERED'}
+                        isDisabled={registrationState?.userRegistered !== 'REGISTERED'}
                         className={classNames('text-black', 'mt-4')}
                         placeholder="Velg et lunsjarrangement"
                         options={events.LUNCH.map((event) => ({ label: event.title, value: event._id }))}
                     />
                     <Select
-                        isDisabled={registrationState.userRegistered !== 'REGISTERED'}
+                        isDisabled={registrationState?.userRegistered !== 'REGISTERED'}
                         className={classNames('text-black', 'mt-4')}
                         placeholder="Velg et middagsarrangement"
                         options={events.DINNER.map((event) => ({ label: event.title, value: event._id }))}

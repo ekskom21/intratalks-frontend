@@ -42,6 +42,7 @@ const authLink = setContext(async (_, { headers }) => {
             headers: {
                 ...headers,
                 Authorization: `Bearer ${jsonResp.data.refresh.access_token}`,
+                'X-User-ID': jsonResp.data.refresh.id_token,
             },
         };
     }
@@ -50,6 +51,7 @@ const authLink = setContext(async (_, { headers }) => {
         headers: {
             ...headers,
             Authorization: `Bearer ${tokens.access_token}`,
+            'X-User-ID': tokens.id_token,
         },
     };
 });

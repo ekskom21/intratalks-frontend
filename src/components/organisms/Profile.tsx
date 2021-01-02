@@ -6,29 +6,11 @@ import classNames from 'classnames';
 import { useQuery } from '@apollo/client';
 import { AllCompanies, ALL_COMPANIES } from '../../api/queries/companies';
 import { Event } from '../../generated/graphql';
-import { USER_REGISTERED, UserRegistered } from '../../api/queries/userRegistered';
 
-const TRANSLATION = {
-    REGISTERED: {
-        label: 'påmeldt',
-        emoji: '✅',
-        color: 'bg-green-400',
-    },
-    WAIT_LIST: {
-        label: 'på venteliste til',
-        emoji: '⚠️',
-        color: 'bg-yellow-200',
-    },
-    NOT_REGISTERED: {
-        label: 'ikke påmeldt',
-        emoji: '❌',
-        color: 'bg-red-400',
-    },
-};
+import SignOutButton from '../atoms/SignOutButton';
+import RegistrationBanner from '../molecules/RegistrationBanner';
 
 const Profile: React.FC = () => {
-    const { data: registrationState, loading: regLoading, error: regError } = useQuery<UserRegistered>(USER_REGISTERED);
-
     const { data, loading, error } = useQuery<AllCompanies>(ALL_COMPANIES);
 
     const events = useMemo(() => {
@@ -45,66 +27,32 @@ const Profile: React.FC = () => {
             .reduce((prev, curr) => ({ ...prev, [curr.time]: prev[curr.time].concat(curr) }), baseMap);
     }, [data]);
 
-    const signOut = () => {
-        localStorage.clear();
-        window.location.replace('/');
-    };
-
     return (
         <>
-            <div
-                className={classNames(
-                    'py-2',
-                    'px-4',
-                    'flex',
-                    'rounded-md',
-                    'w-full',
-                    registrationState
-                        ? TRANSLATION[registrationState.userRegistered].color
-                        : ['dark:bg-white', 'bg-black'],
-                    'text-black',
-                )}
-            >
-                {registrationState ? (
-                    <span>Du er {TRANSLATION[registrationState.userRegistered].label} TechTalks 2021!</span>
-                ) : (
-                    <p>Laster påmeldingsstatus…</p>
-                )}
-                <span className={classNames('ml-auto')}>
-                    {registrationState ? TRANSLATION[registrationState.userRegistered].emoji : '⏳'}
-                </span>
-            </div>
-
-            {loading || regLoading ? (
+            <RegistrationBanner />
+            {loading ? (
                 <p className="mt-4">Laster arrangementer…</p>
-            ) : error || regError ? (
+            ) : error ? (
                 <p className="mt-4">
-                    Kunne ikke laste arrangementer: {[regError?.message, error?.message].flatMap((e) => e).join(' ')}
+                    Kunne ikke laste arrangementer: {error?.message}
                     Vennligst forsøk å laste inn siden på nytt.
                 </p>
             ) : (
                 <>
                     <h2 className={classNames('text-2xl', 'font-bold', 'mt-4')}>Ønsker</h2>
-                    <small>
-                        {registrationState?.userRegistered === 'REGISTERED'
-                            ? 'Ønskene dine blir automatisk lagret.'
-                            : 'Du må være påmeldt TechTalks for å registere ønskene dine.'}
-                    </small>
+                    <small>Ønskene dine blir automatisk lagret.</small>
 
                     <Select
-                        isDisabled={registrationState?.userRegistered !== 'REGISTERED'}
                         className={classNames('text-black', 'mt-2')}
                         placeholder="Velg et frokostarrangement"
                         options={events.BREAKFAST.map((event) => ({ label: event.title, value: event._id }))}
                     />
                     <Select
-                        isDisabled={registrationState?.userRegistered !== 'REGISTERED'}
                         className={classNames('text-black', 'mt-4')}
                         placeholder="Velg et lunsjarrangement"
                         options={events.LUNCH.map((event) => ({ label: event.title, value: event._id }))}
                     />
                     <Select
-                        isDisabled={registrationState?.userRegistered !== 'REGISTERED'}
                         className={classNames('text-black', 'mt-4')}
                         placeholder="Velg et middagsarrangement"
                         options={events.DINNER.map((event) => ({ label: event.title, value: event._id }))}
@@ -112,12 +60,7 @@ const Profile: React.FC = () => {
                 </>
             )}
 
-            <button
-                onClick={signOut}
-                className={classNames('mt-4', 'bg-red-700', 'text-white', 'p-2', 'rounded-md', 'font-bold')}
-            >
-                Logg ut
-            </button>
+            <SignOutButton />
         </>
     );
 };

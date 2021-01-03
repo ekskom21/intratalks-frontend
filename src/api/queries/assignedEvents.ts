@@ -4,7 +4,7 @@ import Event from '../fragments/Event';
 
 // NOTE: The returns for 'breakfast', 'lunch' and 'dinner' are all complete
 // Events with their respective Companies, so you can show some quite
-// interesting infromation without having to retrieve more data.
+// interesting information without having to retrieve more data.
 export const ASSIGNED_EVENTS = gql`
     query {
         assignedEvents {

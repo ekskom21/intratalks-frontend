@@ -35,7 +35,7 @@ const AllEvents: React.FC = () => {
                     )}
 
                     <h2 className="mt-4 title-2">Frokost (10:00-12:00)</h2>
-                    <div className="pl-4 border-l-2 border-white border-dotted">
+                    <div className="pl-4 border-l-2 border-black border-dotted dark:border-white">
                         {companies
                             .flatMap((c) => c.events.map((e) => ({ event: e, company: c })))
                             .filter(({ event: { time } }) => time === 'BREAKFAST')
@@ -50,7 +50,7 @@ const AllEvents: React.FC = () => {
                     </div>
 
                     <h2 className="mt-4 title-2">Lunsj (14:00-16:30)</h2>
-                    <div className="pl-4 border-l-2 border-white border-dotted">
+                    <div className="pl-4 border-l-2 border-black border-dotted dark:border-white">
                         {companies
                             .flatMap((c) => c.events.map((e) => ({ event: e, company: c })))
                             .filter(({ event: { time } }) => time === 'LUNCH')
@@ -65,7 +65,7 @@ const AllEvents: React.FC = () => {
                     </div>
 
                     <h2 className="mt-4 title-2">Middag (19:00-23:59)</h2>
-                    <div className="pl-4 border-l-2 border-white border-dotted">
+                    <div className="pl-4 border-l-2 border-black border-dotted dark:border-white">
                         {companies
                             .flatMap((c) => c.events.map((e) => ({ event: e, company: c })))
                             .filter(({ event: { time } }) => time === 'DINNER')

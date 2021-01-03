@@ -28,7 +28,7 @@ const AllEvents: React.FC = () => {
                             <Link className="text-blue-500 dark:text-blue-400" to="/profile">
                                 gå til profil-siden
                             </Link>{' '}
-                            og velge fra rullgardinmenyene der.
+                            og velge fra rullegardinmenyene der.
                         </p>
                     ) : (
                         <p>

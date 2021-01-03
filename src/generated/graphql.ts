@@ -114,6 +114,8 @@ export type Query = {
   company?: Maybe<Company>;
   /** Get a single event. */
   event?: Maybe<Event>;
+  /** Get all events */
+  events: Array<Event>;
   /** Check registration state of a user */
   userRegistered: RegistrationState;
   /** Get your current desired events. */
@@ -315,6 +317,7 @@ export type QueryResolvers<ContextType = any, ParentType extends ResolversParent
   companies?: Resolver<Array<Maybe<ResolversTypes['Company']>>, ParentType, ContextType>;
   company?: Resolver<Maybe<ResolversTypes['Company']>, ParentType, ContextType, RequireFields<QueryCompanyArgs, '_id'>>;
   event?: Resolver<Maybe<ResolversTypes['Event']>, ParentType, ContextType, RequireFields<QueryEventArgs, '_id'>>;
+  events?: Resolver<Array<ResolversTypes['Event']>, ParentType, ContextType>;
   userRegistered?: Resolver<ResolversTypes['RegistrationState'], ParentType, ContextType>;
   desiredEvents?: Resolver<Maybe<ResolversTypes['UserInterest']>, ParentType, ContextType>;
   assignedEvents?: Resolver<Maybe<ResolversTypes['AssignedEvents']>, ParentType, ContextType>;

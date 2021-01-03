@@ -1,6 +1,7 @@
 import classNames from 'classnames';
 import React from 'react';
 import Members from '../molecules/Members';
+import CompaniesList from '../molecules/CompaniesList';
 
 const About: React.FC = () => {
     return (
@@ -45,6 +46,7 @@ const About: React.FC = () => {
 
             <h2 className={classNames('title-2', 'mt-4')}>Selskaper</h2>
             <p>Alle selskapene som har gjort årets Tech Talks mulig:</p>
+            <CompaniesList />
 
             <h2 className={classNames('title-2', 'mt-4')}>Medlemmer</h2>
             <Members />

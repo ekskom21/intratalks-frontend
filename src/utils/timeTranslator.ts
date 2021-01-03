@@ -1,7 +1,7 @@
 import { EventTime } from '../generated/graphql';
-import { addHours, fromUnixTime } from 'date-fns';
+import { addHours, fromUnixTime, subHours } from 'date-fns';
 
-export const BASE_TIME = fromUnixTime(1613642400);
+export const BASE_TIME = process.env.NODE_ENV === 'development' ? subHours(new Date(), 4) : fromUnixTime(1613642400);
 
 export const translateTime = (time: EventTime): Date => {
     return {

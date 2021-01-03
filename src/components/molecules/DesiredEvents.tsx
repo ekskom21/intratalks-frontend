@@ -86,9 +86,9 @@ const DesiredEvents: React.FC = () => {
                         ? // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
                           {
                               label:
-                                  events.BREAKFAST.find((e) => e._id === breakfast)?.title ??
+                                  events.BREAKFAST.find((e) => e._id === breakfast._id)?.title ??
                                   'Fant ikke arrangementet ditt.',
-                              value: breakfast,
+                              value: breakfast._id,
                           }
                         : null
                 }
@@ -103,8 +103,9 @@ const DesiredEvents: React.FC = () => {
                         ? // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
                           {
                               label:
-                                  events.LUNCH.find((e) => e._id === lunch)?.title ?? 'Fant ikke arrangementet ditt.',
-                              value: lunch,
+                                  events.LUNCH.find((e) => e._id === lunch._id)?.title ??
+                                  'Fant ikke arrangementet ditt.',
+                              value: lunch._id,
                           }
                         : null
                 }
@@ -119,8 +120,9 @@ const DesiredEvents: React.FC = () => {
                         ? // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
                           {
                               label:
-                                  events.DINNER.find((e) => e._id === dinner)?.title ?? 'Fant ikke arrangementet ditt.',
-                              value: dinner,
+                                  events.DINNER.find((e) => e._id === dinner._id)?.title ??
+                                  'Fant ikke arrangementet ditt.',
+                              value: dinner._id,
                           }
                         : null
                 }

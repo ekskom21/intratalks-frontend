@@ -48,7 +48,7 @@ export type MutationRefreshArgs = {
 
 
 export type MutationRegisterInterestArgs = {
-  event_id: Scalars['ID'];
+  event_id: Scalars['String'];
 };
 
 export enum EventTime {
@@ -92,9 +92,18 @@ export type Company = {
 export type UserInterest = {
   __typename?: 'UserInterest';
   user_id: Scalars['String'];
-  breakfast?: Maybe<Scalars['ID']>;
-  lunch?: Maybe<Scalars['ID']>;
-  dinner?: Maybe<Scalars['ID']>;
+  breakfast?: Maybe<Event>;
+  lunch?: Maybe<Event>;
+  dinner?: Maybe<Event>;
+};
+
+/** Almost the same as UserInterest, but the events can't be null here anymore. */
+export type AssignedEvents = {
+  __typename?: 'AssignedEvents';
+  user_id: Scalars['String'];
+  breakfast: Event;
+  lunch: Event;
+  dinner: Event;
 };
 
 export type Query = {
@@ -109,6 +118,8 @@ export type Query = {
   userRegistered: RegistrationState;
   /** Get your current desired events. */
   desiredEvents?: Maybe<UserInterest>;
+  /** Get your assigned events */
+  assignedEvents?: Maybe<AssignedEvents>;
 };
 
 
@@ -205,14 +216,15 @@ export type ResolversTypes = {
   String: ResolverTypeWrapper<Scalars['String']>;
   Int: ResolverTypeWrapper<Scalars['Int']>;
   Mutation: ResolverTypeWrapper<{}>;
-  ID: ResolverTypeWrapper<Scalars['ID']>;
   EventTime: EventTime;
   Location: ResolverTypeWrapper<Location>;
   Float: ResolverTypeWrapper<Scalars['Float']>;
   Event: ResolverTypeWrapper<Event>;
+  ID: ResolverTypeWrapper<Scalars['ID']>;
   ColorSet: ResolverTypeWrapper<ColorSet>;
   Company: ResolverTypeWrapper<Company>;
   UserInterest: ResolverTypeWrapper<UserInterest>;
+  AssignedEvents: ResolverTypeWrapper<AssignedEvents>;
   Query: ResolverTypeWrapper<{}>;
   DateTime: ResolverTypeWrapper<Scalars['DateTime']>;
   Boolean: ResolverTypeWrapper<Scalars['Boolean']>;
@@ -224,13 +236,14 @@ export type ResolversParentTypes = {
   String: Scalars['String'];
   Int: Scalars['Int'];
   Mutation: {};
-  ID: Scalars['ID'];
   Location: Location;
   Float: Scalars['Float'];
   Event: Event;
+  ID: Scalars['ID'];
   ColorSet: ColorSet;
   Company: Company;
   UserInterest: UserInterest;
+  AssignedEvents: AssignedEvents;
   Query: {};
   DateTime: Scalars['DateTime'];
   Boolean: Scalars['Boolean'];
@@ -284,9 +297,17 @@ export type CompanyResolvers<ContextType = any, ParentType extends ResolversPare
 
 export type UserInterestResolvers<ContextType = any, ParentType extends ResolversParentTypes['UserInterest'] = ResolversParentTypes['UserInterest']> = {
   user_id?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  breakfast?: Resolver<Maybe<ResolversTypes['ID']>, ParentType, ContextType>;
-  lunch?: Resolver<Maybe<ResolversTypes['ID']>, ParentType, ContextType>;
-  dinner?: Resolver<Maybe<ResolversTypes['ID']>, ParentType, ContextType>;
+  breakfast?: Resolver<Maybe<ResolversTypes['Event']>, ParentType, ContextType>;
+  lunch?: Resolver<Maybe<ResolversTypes['Event']>, ParentType, ContextType>;
+  dinner?: Resolver<Maybe<ResolversTypes['Event']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type AssignedEventsResolvers<ContextType = any, ParentType extends ResolversParentTypes['AssignedEvents'] = ResolversParentTypes['AssignedEvents']> = {
+  user_id?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  breakfast?: Resolver<ResolversTypes['Event'], ParentType, ContextType>;
+  lunch?: Resolver<ResolversTypes['Event'], ParentType, ContextType>;
+  dinner?: Resolver<ResolversTypes['Event'], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
@@ -296,6 +317,7 @@ export type QueryResolvers<ContextType = any, ParentType extends ResolversParent
   event?: Resolver<Maybe<ResolversTypes['Event']>, ParentType, ContextType, RequireFields<QueryEventArgs, '_id'>>;
   userRegistered?: Resolver<ResolversTypes['RegistrationState'], ParentType, ContextType>;
   desiredEvents?: Resolver<Maybe<ResolversTypes['UserInterest']>, ParentType, ContextType>;
+  assignedEvents?: Resolver<Maybe<ResolversTypes['AssignedEvents']>, ParentType, ContextType>;
 };
 
 export interface DateTimeScalarConfig extends GraphQLScalarTypeConfig<ResolversTypes['DateTime'], any> {
@@ -310,6 +332,7 @@ export type Resolvers<ContextType = any> = {
   ColorSet?: ColorSetResolvers<ContextType>;
   Company?: CompanyResolvers<ContextType>;
   UserInterest?: UserInterestResolvers<ContextType>;
+  AssignedEvents?: AssignedEventsResolvers<ContextType>;
   Query?: QueryResolvers<ContextType>;
   DateTime?: GraphQLScalarType;
 };

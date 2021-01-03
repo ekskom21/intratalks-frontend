@@ -73,14 +73,23 @@ const DesiredEvents: React.FC = () => {
     return (
         <>
             <h2 className={classNames('text-2xl', 'font-bold', 'mt-4')}>Ønsker</h2>
-            <small>{mutationLoading ? 'Ønskene dine lagres…' : 'Ønskene dine blir automatisk lagret.'}</small>
+            <small>
+                {mutationLoading
+                    ? 'Ønskene dine lagres…'
+                    : 'Ønskene dine blir automatisk lagret. Du kan kun velge ett ønsket arrangement for frokost/lunsj/middag.'}
+            </small>
 
             <Select
                 onChange={onChange}
                 defaultValue={
                     breakfast
                         ? // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-                          { label: events.BREAKFAST.find((e) => e._id === breakfast)!.title, value: breakfast }
+                          {
+                              label:
+                                  events.BREAKFAST.find((e) => e._id === breakfast)?.title ??
+                                  'Fant ikke arrangementet ditt.',
+                              value: breakfast,
+                          }
                         : null
                 }
                 className={classNames('text-black', 'mt-2')}
@@ -92,7 +101,11 @@ const DesiredEvents: React.FC = () => {
                 defaultValue={
                     lunch
                         ? // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-                          { label: events.LUNCH.find((e) => e._id === lunch)!.title, value: lunch }
+                          {
+                              label:
+                                  events.LUNCH.find((e) => e._id === lunch)?.title ?? 'Fant ikke arrangementet ditt.',
+                              value: lunch,
+                          }
                         : null
                 }
                 className={classNames('text-black', 'mt-4')}
@@ -104,7 +117,11 @@ const DesiredEvents: React.FC = () => {
                 defaultValue={
                     dinner
                         ? // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-                          { label: events.DINNER.find((e) => e._id === dinner)!.title, value: dinner }
+                          {
+                              label:
+                                  events.DINNER.find((e) => e._id === dinner)?.title ?? 'Fant ikke arrangementet ditt.',
+                              value: dinner,
+                          }
                         : null
                 }
                 className={classNames('text-black', 'mt-4')}

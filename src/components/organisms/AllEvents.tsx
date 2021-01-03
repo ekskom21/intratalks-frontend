@@ -31,10 +31,7 @@ const AllEvents: React.FC = () => {
                             og velge fra rullgardinmenyene der.
                         </p>
                     ) : (
-                        <p>
-                            For å velge ønskede arrangementer til TechTalks må du først logge inn via navigasjons-baren
-                            på toppen av skjermen.
-                        </p>
+                        <p>For å velge ønskede arrangementer til TechTalks må du først logge inn.</p>
                     )}
 
                     <h2 className="mt-4 title-2">Frokost (10:00-12:00)</h2>

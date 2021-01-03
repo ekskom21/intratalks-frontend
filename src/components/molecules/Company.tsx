@@ -1,9 +1,9 @@
 import classNames from 'classnames';
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { AllCompanies } from '../../api/queries/companies';
+import { Company as CompanyT } from '../../generated/graphql';
 
-type Props = { company: AllCompanies['companies'][number] };
+type Props = { company: CompanyT };
 
 const Company: React.FC<Props> = (props) => {
     return (

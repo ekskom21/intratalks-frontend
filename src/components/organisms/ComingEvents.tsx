@@ -7,7 +7,7 @@ import { ASSIGNED_EVENTS, AssignedEvents } from '../../api/queries/assignedEvent
 import LoadingAndErrorWrapper from '../molecules/LoadingAndErrorWrapper';
 
 const ComingEvents: React.FC = () => {
-    const { data: data, loading, error } = useQuery<AssignedEvents>(ASSIGNED_EVENTS);
+    const { data, loading, error } = useQuery<AssignedEvents>(ASSIGNED_EVENTS);
 
     return (
         <LoadingAndErrorWrapper loading={loading} error={error} data={data}>

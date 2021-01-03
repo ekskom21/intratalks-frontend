@@ -12,13 +12,17 @@ type Props<T> = {
 // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 const LoadingAndErrorWrapper = <T,>(props: Props<T>) => {
     if (props.loading) {
-        return <div className="w-full px-4 py-2 bg-yellow-500 dark:bg-yellow-400">Vennligst vent…</div>;
+        return (
+            <div className="w-full px-4 py-2 font-bold bg-yellow-400 rounded-md dark:bg-yellow-500">
+                ⏳ Vennligst vent<span className="animate-pulse">…</span>
+            </div>
+        );
     }
 
     if (props.error) {
         return (
-            <div className="w-full px-4 py-2 bg-red-500 dark:bg-red-400">
-                Det oppsto en feil ved henting av dataen. {props.error.message}
+            <div className="w-full px-4 py-2 bg-red-400 rounded-md dark:bg-red-500">
+                ⛔️ Det oppsto en feil ved henting av dataen. {props.error.message}
             </div>
         );
     }

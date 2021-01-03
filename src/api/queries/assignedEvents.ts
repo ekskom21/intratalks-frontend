@@ -1,5 +1,6 @@
 import { gql } from '@apollo/client';
 import { AssignedEvents as AssignedEventsT } from '../../generated/graphql';
+import Event from '../fragments/Event';
 
 // NOTE: The returns for 'breakfast', 'lunch' and 'dinner' are all complete
 // Events with their respective Companies, so you can show some quite
@@ -21,26 +22,7 @@ export const ASSIGNED_EVENTS = gql`
         }
     }
 
-    fragment allFields on Event {
-        _id
-        title
-        time
-        location {
-            lat
-            lng
-            name
-        }
-        description
-        company {
-            _id
-            name
-            colors {
-                primary
-                secondary
-            }
-            description
-        }
-    }
+    ${Event.fragments.allFields}
 `;
 
 export type AssignedEvents = { assignedEvents: AssignedEventsT };

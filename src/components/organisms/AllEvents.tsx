@@ -34,11 +34,19 @@ const AllEvents: React.FC = () => {
                         <p>For å velge ønskede arrangementer til TechTalks må du først logge inn.</p>
                     )}
 
+                    {/* TODO: Abstract out to own molecule */}
                     <h2 className="mt-4 title-2">Frokost (10:00-12:00)</h2>
-                    <div className="pl-4 border-l-2 border-black border-dotted dark:border-white">
+                    <div className="flex max-w-full pb-2 overflow-auto flex-nowrap">
                         {companies
                             .flatMap((c) => c.events.map((e) => ({ event: e, company: c })))
                             .filter(({ event: { time } }) => time === 'BREAKFAST')
+                            .sort(({ event: event1 }, { event: event2 }) =>
+                                event1._id === desiredEventsData?.desiredEvents.breakfast?._id
+                                    ? -1
+                                    : event2._id === desiredEventsData?.desiredEvents.breakfast?._id
+                                    ? 1
+                                    : 0,
+                            )
                             .map(({ event, company }) => (
                                 <SmallEvent
                                     event={event}
@@ -48,12 +56,18 @@ const AllEvents: React.FC = () => {
                                 />
                             ))}
                     </div>
-
                     <h2 className="mt-4 title-2">Lunsj (14:00-16:30)</h2>
-                    <div className="pl-4 border-l-2 border-black border-dotted dark:border-white">
+                    <div className="flex max-w-full pb-2 overflow-auto flex-nowrap">
                         {companies
                             .flatMap((c) => c.events.map((e) => ({ event: e, company: c })))
                             .filter(({ event: { time } }) => time === 'LUNCH')
+                            .sort(({ event: event1 }, { event: event2 }) =>
+                                event1._id === desiredEventsData?.desiredEvents.lunch?._id
+                                    ? -1
+                                    : event2._id === desiredEventsData?.desiredEvents.lunch?._id
+                                    ? 1
+                                    : 0,
+                            )
                             .map(({ event, company }) => (
                                 <SmallEvent
                                     event={event}
@@ -63,12 +77,18 @@ const AllEvents: React.FC = () => {
                                 />
                             ))}
                     </div>
-
                     <h2 className="mt-4 title-2">Middag (19:00-23:59)</h2>
-                    <div className="pl-4 border-l-2 border-black border-dotted dark:border-white">
+                    <div className="flex max-w-full pb-2 overflow-auto flex-nowrap">
                         {companies
                             .flatMap((c) => c.events.map((e) => ({ event: e, company: c })))
                             .filter(({ event: { time } }) => time === 'DINNER')
+                            .sort(({ event: event1 }, { event: event2 }) =>
+                                event1._id === desiredEventsData?.desiredEvents.dinner?._id
+                                    ? -1
+                                    : event2._id === desiredEventsData?.desiredEvents.dinner?._id
+                                    ? 1
+                                    : 0,
+                            )
                             .map(({ event, company }) => (
                                 <SmallEvent
                                     event={event}

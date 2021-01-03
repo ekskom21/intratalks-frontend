@@ -8,14 +8,18 @@ import { Company, Event } from '../../generated/graphql';
 type Props = {
     event: Event;
     company: Company;
+    isDesiredEvent?: boolean;
 };
 
-const SmallEvent: React.FC<Props> = ({ company, event }) => {
+const SmallEvent: React.FC<Props> = ({ company, event, isDesiredEvent }) => {
     return (
         <Link to={`/event/${event._id}`}>
             <section className={classNames('flex', 'justify-between', 'my-2')}>
                 <div>
-                    <h5 className={classNames('font-semibold')}>{event.title}</h5>
+                    <h5 className={classNames('font-semibold')}>
+                        {isDesiredEvent ? '⭐️ ' : null}
+                        {event.title}
+                    </h5>
                     <small>
                         {company.name} · {event.location.name}
                     </small>

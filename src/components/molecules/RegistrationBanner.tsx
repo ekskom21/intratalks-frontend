@@ -34,7 +34,8 @@ const RegistrationBanner: React.FC = () => {
                 'rounded-md',
                 'w-full',
                 data ? TRANSLATION[data.userRegistered].color : ['dark:bg-white', 'bg-black'],
-                'text-black',
+                'text-white',
+                'dark:text-black',
             )}
         >
             {!loading && data ? (

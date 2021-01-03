@@ -9,11 +9,11 @@ type Props = {
 
 const Member: React.FC<Props> = (props) => {
     return (
-        <div className="my-2 flex items-center space-x-4">
+        <div className="flex items-center my-2 space-x-4">
             <img
                 src={props.image}
                 alt="member-image"
-                className="rounded-full h-12 w-12 flex items-center justify-center"
+                className="flex items-center justify-center w-12 h-12 rounded-full"
             ></img>
             <div className="flex-auto">
                 <h2 className="text-lg">{props.name}</h2>

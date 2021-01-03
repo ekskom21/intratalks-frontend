@@ -1,7 +1,7 @@
 import { EventTime } from '../generated/graphql';
 import { isPast, subDays, addHours, fromUnixTime, subHours } from 'date-fns';
 
-export const BASE_TIME = process.env.NODE_ENV === 'development' ? subHours(new Date(), 4) : fromUnixTime(1613642400);
+export const BASE_TIME = process.env.NODE_ENV !== 'development' ? subHours(new Date(), 4) : fromUnixTime(1613642400);
 
 export const translateTime = (time: EventTime): Date => {
     return {
@@ -26,4 +26,4 @@ export const timetable: Record<EventTime, { start: Date; end: Date }> = {
     },
 };
 
-export const cancellationDeadlinePassed = isPast(subDays(timetable['BREAKFAST'].start, 1));
+export const cancelationDeadlinePassed = isPast(subDays(timetable['BREAKFAST'].start, 1));

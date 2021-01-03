@@ -35,43 +35,49 @@ const AllEvents: React.FC = () => {
                     )}
 
                     <h2 className="mt-4 title-2">Frokost (10:00-12:00)</h2>
-                    {companies
-                        .flatMap((c) => c.events.map((e) => ({ event: e, company: c })))
-                        .filter(({ event: { time } }) => time === 'BREAKFAST')
-                        .map(({ event, company }) => (
-                            <SmallEvent
-                                event={event}
-                                company={company}
-                                key={event._id}
-                                isDesiredEvent={event._id === desiredEventsData?.desiredEvents.breakfast?._id}
-                            />
-                        ))}
+                    <div className="pl-4 border-l-2 border-white border-dotted">
+                        {companies
+                            .flatMap((c) => c.events.map((e) => ({ event: e, company: c })))
+                            .filter(({ event: { time } }) => time === 'BREAKFAST')
+                            .map(({ event, company }) => (
+                                <SmallEvent
+                                    event={event}
+                                    company={company}
+                                    key={event._id}
+                                    isDesiredEvent={event._id === desiredEventsData?.desiredEvents.breakfast?._id}
+                                />
+                            ))}
+                    </div>
 
                     <h2 className="mt-4 title-2">Lunsj (14:00-16:30)</h2>
-                    {companies
-                        .flatMap((c) => c.events.map((e) => ({ event: e, company: c })))
-                        .filter(({ event: { time } }) => time === 'LUNCH')
-                        .map(({ event, company }) => (
-                            <SmallEvent
-                                event={event}
-                                company={company}
-                                key={event._id}
-                                isDesiredEvent={event._id === desiredEventsData?.desiredEvents.lunch?._id}
-                            />
-                        ))}
+                    <div className="pl-4 border-l-2 border-white border-dotted">
+                        {companies
+                            .flatMap((c) => c.events.map((e) => ({ event: e, company: c })))
+                            .filter(({ event: { time } }) => time === 'LUNCH')
+                            .map(({ event, company }) => (
+                                <SmallEvent
+                                    event={event}
+                                    company={company}
+                                    key={event._id}
+                                    isDesiredEvent={event._id === desiredEventsData?.desiredEvents.lunch?._id}
+                                />
+                            ))}
+                    </div>
 
                     <h2 className="mt-4 title-2">Middag (19:00-23:59)</h2>
-                    {companies
-                        .flatMap((c) => c.events.map((e) => ({ event: e, company: c })))
-                        .filter(({ event: { time } }) => time === 'DINNER')
-                        .map(({ event, company }) => (
-                            <SmallEvent
-                                event={event}
-                                company={company}
-                                key={event._id}
-                                isDesiredEvent={event._id === desiredEventsData?.desiredEvents.dinner?._id}
-                            />
-                        ))}
+                    <div className="pl-4 border-l-2 border-white border-dotted">
+                        {companies
+                            .flatMap((c) => c.events.map((e) => ({ event: e, company: c })))
+                            .filter(({ event: { time } }) => time === 'DINNER')
+                            .map(({ event, company }) => (
+                                <SmallEvent
+                                    event={event}
+                                    company={company}
+                                    key={event._id}
+                                    isDesiredEvent={event._id === desiredEventsData?.desiredEvents.dinner?._id}
+                                />
+                            ))}
+                    </div>
                 </>
             )}
         </LoadingAndErrorWrapper>

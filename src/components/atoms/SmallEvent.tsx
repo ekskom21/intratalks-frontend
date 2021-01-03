@@ -21,6 +21,7 @@ const SmallEvent: React.FC<Props> = ({ company, event, isDesiredEvent }) => {
                     'justify-between',
                     'my-2',
                     'w-60',
+                    'lg:w-full',
                     'mr-4',
                     'p-4',
                     isDesiredEvent ? 'border-4' : 'border',

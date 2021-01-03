@@ -70,6 +70,7 @@ const ComingEvent: React.FC<Props> = (props) => {
                                     `to-${props.event.company.colors.secondary}`,
                                     'text-transparent',
                                     'bg-clip-text',
+                                    'font-extrabold',
                                 )}
                             >
                                 →

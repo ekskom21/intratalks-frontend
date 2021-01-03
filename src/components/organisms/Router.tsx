@@ -2,6 +2,7 @@ import React from 'react';
 
 import { Switch, Route, useLocation } from 'react-router-dom';
 import classNames from 'classnames';
+import { isPast, subDays } from 'date-fns';
 
 import ComingEvents from './ComingEvents';
 import EventDetails from './EventDetails';
@@ -15,11 +16,14 @@ import Navbar from '../molecules/Navbar';
 import { SignedInCtx } from '../../contexts/signedIn';
 import { AuthenticationCallback } from './Authentication';
 import { Tokens } from '../../generated/graphql';
+import { timetable } from '../../utils/timeTranslator';
 
 const Router: React.FC = () => {
     const location = useLocation();
 
     const authData = localStorage.getItem('auth_data');
+
+    const cancellationDeadlinePassed = isPast(subDays(timetable['BREAKFAST'].start, 1));
 
     return (
         <SignedInCtx.Provider value={authData !== null ? (JSON.parse(authData) as Tokens) : null}>
@@ -27,7 +31,11 @@ const Router: React.FC = () => {
                 <Navbar title={location.pathname.slice(1)} />
                 <Switch>
                     <Page>
-                        <Route exact path="/" component={!!authData ? ComingEvents : AllEvents} />
+                        <Route
+                            exact
+                            path="/"
+                            component={!!authData && cancellationDeadlinePassed ? ComingEvents : AllEvents}
+                        />
                         <Route exact path="/companies" component={Companies} />
                         <Route path="/event/:id" component={EventDetails} />{' '}
                         <Route path="/auth-callback" component={AuthenticationCallback} />

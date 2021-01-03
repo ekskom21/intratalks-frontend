@@ -15,7 +15,7 @@ import Navbar from '../molecules/Navbar';
 import { SignedInCtx } from '../../contexts/signedIn';
 import { AuthenticationCallback } from './Authentication';
 import { Tokens } from '../../generated/graphql';
-import { cancellationDeadlinePassed } from '../../utils/timeTranslator';
+import { cancelationDeadlinePassed } from '../../utils/timeTranslator';
 
 const Router: React.FC = () => {
     const location = useLocation();
@@ -31,7 +31,7 @@ const Router: React.FC = () => {
                         <Route
                             exact
                             path="/"
-                            component={!!authData && cancellationDeadlinePassed ? ComingEvents : AllEvents}
+                            component={!!authData && cancelationDeadlinePassed ? ComingEvents : AllEvents}
                         />
                         <Route exact path="/companies" component={Companies} />
                         <Route path="/event/:id" component={EventDetails} />{' '}

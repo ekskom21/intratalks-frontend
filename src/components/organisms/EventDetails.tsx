@@ -8,7 +8,7 @@ import { EVENT, SpecificEvent } from '../../api/queries/event';
 import { RegisterInterest, REGISTER_INTEREST } from '../../api/mutations/registerInterest';
 import { MutationRegisterInterestArgs } from '../../generated/graphql';
 import { DesiredEvents as DesiredEventsT, DESIRED_EVENTS } from '../../api/queries/desiredEvents';
-import { cancellationDeadlinePassed } from '../../utils/timeTranslator';
+import { cancelationDeadlinePassed } from '../../utils/timeTranslator';
 
 const timeTranslation = (time: SpecificEvent['event']['time']) =>
     ({ BREAKFAST: 'FROKOST', LUNCH: 'LUNSJ', DINNER: 'MIDDAG' }[time]);
@@ -67,7 +67,7 @@ const EventDetails: React.FC = () => {
 
             <p className={classNames('mt-4')}>{event.description}</p>
 
-            {cancellationDeadlinePassed ? null : mutationLoading || loadingDesiredEvents ? (
+            {cancelationDeadlinePassed ? null : mutationLoading || loadingDesiredEvents ? (
                 <p className="mt-4">Laster…</p>
             ) : desiredEventsData ? (
                 desiredEventsData.desiredEvents[

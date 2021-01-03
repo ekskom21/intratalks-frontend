@@ -26,4 +26,4 @@ export const timetable: Record<EventTime, { start: Date; end: Date }> = {
     },
 };
 
-export const cancellationDeadlinePassed = isPast(subDays(timetable['BREAKFAST'].start, 1));
+export const cancelationDeadlinePassed = isPast(subDays(timetable['BREAKFAST'].start, 1));

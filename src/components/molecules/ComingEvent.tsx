@@ -79,6 +79,7 @@ const ComingEvent: React.FC<Props> = (props) => {
                     </>
                 ) : null}
             </section>
+            j{' '}
         </Link>
     );
 };

@@ -3,6 +3,7 @@ import React from 'react';
 import { Switch, Route, useLocation } from 'react-router-dom';
 import classNames from 'classnames';
 
+import CompanyDetails from './CompanyDetails';
 import ComingEvents from './ComingEvents';
 import EventDetails from './EventDetails';
 import Companies from './Companies';
@@ -34,7 +35,8 @@ const Router: React.FC = () => {
                             component={!!authData && cancelationDeadlinePassed ? ComingEvents : AllEvents}
                         />
                         <Route exact path="/companies" component={Companies} />
-                        <Route path="/event/:id" component={EventDetails} />{' '}
+                        <Route path="/event/:id" component={EventDetails} />
+                        <Route path="/company/:id" component={CompanyDetails} />
                         <Route path="/auth-callback" component={AuthenticationCallback} />
                         <Route path="/about" component={About} />
                         <Route path="/profile" component={Profile} />

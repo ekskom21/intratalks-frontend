@@ -79,6 +79,7 @@ const DesiredEvents: React.FC = () => {
                     : 'Ønskene dine blir automatisk lagret. Du kan kun velge ett ønsket arrangement for frokost/lunsj/middag.'}
             </small>
 
+            <p className="my-2">Frokost</p>
             <Select
                 onChange={onChange}
                 defaultValue={
@@ -92,10 +93,11 @@ const DesiredEvents: React.FC = () => {
                           }
                         : null
                 }
-                className={classNames('text-black', 'mt-2')}
+                className={classNames('text-black')}
                 placeholder="Velg et frokostarrangement"
                 options={events.BREAKFAST.map((event) => ({ label: event.title, value: event._id }))}
             />
+            <p className="my-2">Lunsj</p>
             <Select
                 onChange={onChange}
                 defaultValue={
@@ -109,10 +111,11 @@ const DesiredEvents: React.FC = () => {
                           }
                         : null
                 }
-                className={classNames('text-black', 'mt-4')}
+                className={classNames('text-black')}
                 placeholder="Velg et lunsjarrangement"
                 options={events.LUNCH.map((event) => ({ label: event.title, value: event._id }))}
             />
+            <p className="my-2">Middag</p>
             <Select
                 onChange={onChange}
                 defaultValue={
@@ -126,7 +129,7 @@ const DesiredEvents: React.FC = () => {
                           }
                         : null
                 }
-                className={classNames('text-black', 'mt-4')}
+                className={classNames('text-black')}
                 placeholder="Velg et middagsarrangement"
                 options={events.DINNER.map((event) => ({ label: event.title, value: event._id }))}
             />
